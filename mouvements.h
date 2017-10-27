@@ -1,7 +1,10 @@
 #include "librairies.h"
 
-typedef struct TRAMWAY{
-	}TRAMWAY;
+typedef struct Tramway{
+	int vitesse;
+	char custom[30];
+	int longueur;
+	}Tramway;
 
 enum Direction // Enumeration des directions possibles pour un vehicule
 {
@@ -95,12 +98,26 @@ typedef struct TrafficLightList // Liste chainee des feux pour le roulement des 
 	struct TrafficLightList *next;
 } TrafficLightList;
 
+typedef struct Boat{
+	int posX;
+	int posY;
+	char custom[30];
+	Direction Direction;	
+	}Boat;
+
+typedef struct BoatList // Liste chainee des Bateaux
+{
+	Boat* Boat;
+	struct BoatList *next;
+} BoatList;
+
 /*
 typedef struct Chrono Chrono{
 	double Time;
 	double Time_
 */
 
+void AppendBoatList(BoatList **List,Boat* Boat);
 
 void vagues();
 void feux();
@@ -129,7 +146,7 @@ void VehiculeEater(VehiculeList **List, Vehicule* Vehicule); //Fonction ayant po
 
 void AppendVehiculeList(VehiculeList **List, Vehicule* Vehicule); //Fonction permettant d'ajouter un Vehicule à la liste des Vehicules (à appeler après le Spawner)
 
-Vehicule* VehiculeSpawner(int posX, int posY); //renvoie un pointeur de vehicule ayant pour position (x,y)
+Vehicule* VehiculeSpawner(int posX, int posY,Direction Direction); //renvoie un pointeur de vehicule ayant pour position (x,y) et pour Direction Direction
 
 void VisualiserVehiculeList(VehiculeList *List); //permet de visualiser une liste de vehicules (affiche les positions de ces vehicules)
 
@@ -138,3 +155,11 @@ void Decision(Vehicule* Vehicule, char ** map); //Fonction determinant la direct
 void Deplacement(Vehicule* Vehicule); //Affiche le vehicule a sa prochaine position dans le terminal
 
 void PlaceTerminale(int posX, int posY); //Fonction permettant de s'éviter la syntaxe trop lourde du placement du curseur dans le terminal
+
+Boat* BoatSpawner(int posX, int posY, Direction Direction); //Fonction initialisant un Bateau allant dans la Direction Direction a la position (posX,posY)
+
+void AppendBoatList(BoatList **List,Boat* Boat); //Fonction ajoutant un Boat a une BoatList
+
+void BoatEater(BoatList **List, Boat* Boat); //Supprime un element d'une BoatList
+
+void VisualiserBoatList(BoatList *List); //Affiche les positions des differents bateaux contenus dans la BoatList

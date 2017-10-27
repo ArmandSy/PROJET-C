@@ -67,8 +67,8 @@ void Roulement_feux(TrafficLightList *List)
 	tmp = List;
 	while(tmp != NULL)
 		{
-			tmp->TrafficLight->(Current_Color+=1)%4;
-			tmp->TrafficLight->(TimeForSwitch+=1)%4;
+			tmp->TrafficLight->Current_Color+=1%4;
+			tmp->TrafficLight->TimeForSwitch+=1%4;
 			tmp = tmp->next;
 		}
 }
@@ -133,11 +133,12 @@ void AppendVehiculeList(VehiculeList **List, Vehicule* Vehicule)
 	*List = element;
 }
 
-Vehicule* VehiculeSpawner(int posX, int posY)
+Vehicule* VehiculeSpawner(int posX, int posY, Direction Direction)
 {
 	Vehicule* Veh=malloc(sizeof(Vehicule));
 	Veh->posX=posX;
 	Veh->posY=posY;
+	Veh->Direction=Direction;
 	return Veh;
 }
 
@@ -148,7 +149,7 @@ void VisualiserVehiculeList(VehiculeList *List)
 	while (tmp != NULL)
 		{
 			printf("posX:%d\n",tmp->Vehicule->posX);
-			printf("posy:%d\n",tmp->Vehicule->posY);
+			printf("posY:%d\n",tmp->Vehicule->posY);
 			tmp = tmp->next;
 		}
 }
@@ -163,8 +164,8 @@ void Decision(Vehicule* Vehicule, char ** map)
 
 void Deplacement(Vehicule* Vehicule)
 {
-	PlaceTerminale(FuturePosition(Vehicule)->posX,FuturePosition(Vehicule)->posY);
-	printf("%c",Vehicule.custom[30]);
+	PlaceTerminale(PositionFuture(Vehicule)->posX,PositionFuture(Vehicule)->posY);
+	printf("%c",Vehicule->custom[30]);
 }
 
 
@@ -174,5 +175,50 @@ void PlaceTerminale(int posX, int posY)
 	printf("\33[%d;%dH",posX,posY);
 }
 
+Boat* BoatSpawner(int posX, int posY, Direction Direction)
+{
+	Boat* Boat=malloc(sizeof(Boat));
+	Boat->posX=posX;
+	Boat->posY=posY;
+	Boat->Direction=Direction;
+	return Boat;
+}
 
+void AppendBoatList(BoatList **List,Boat* Boat)
+{
+	BoatList *element;
+	element = malloc(sizeof(*element));
+	element->Boat = Boat;
+	element->next = *List;
+	*List = element;
+}
+
+void BoatEater(BoatList **List, Boat* Boat)
+{
+	BoatList* PointeurCourant;
+	BoatList* PointeurPrecedent;
+	PointeurPrecedent = NULL; //pas de pointeur precedent pour le 1er element de la liste
+	for(PointeurCourant = *List; PointeurCourant != NULL; PointeurPrecedent = PointeurCourant, PointeurCourant = PointeurCourant->next){
+			if (PointeurCourant->Boat == Boat){
+				if (PointeurPrecedent == NULL){ 	/*cas ou on voudrait en fait supprimer le 1er element de la liste (Particulier)	*/
+					*List = PointeurCourant->next;} /*on dit juste que le 1er element est en fait le 2e, et on free plus bas */
+				else{
+					PointeurPrecedent->next = PointeurCourant->next; // on skip l'element a supprimer									
+									}
+			free(PointeurCourant);break;
+								}
+						}
+}
+
+void VisualiserBoatList(BoatList *List)
+{
+	BoatList *tmp;
+	tmp = List;
+	while (tmp != NULL)
+		{
+			printf("posX:%d\n",tmp->Boat->posX);
+			printf("posY:%d\n",tmp->Boat->posY);
+			tmp = tmp->next;
+		}
+}
 	

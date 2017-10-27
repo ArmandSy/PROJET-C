@@ -26,8 +26,9 @@ VisualiserTrafficLightList(Liste);
 
 */
 
-/* TESTS RELATIFS AUX VEHICULES 
+// TESTS RELATIFS AUX VEHICULES 
 
+/*
 VehiculeList* Liste = NULL;
 Vehicule* Vehicule1 = VehiculeSpawner(4,3);
 Vehicule* Vehicule2 = VehiculeSpawner(6,7);
@@ -41,8 +42,21 @@ printf("On retire now Vehicule 1 puis on affiche la liste\n");
 VehiculeEater(&Liste, Vehicule1);
 VisualiserVehiculeList(Liste);
 printf("fin du programme \n");
-
 */
+
+//TESTS RELATIFS AUX BATEAUUUUUUUX
+
+BoatList* Liste = NULL;
+Boat* Voilier = BoatSpawner(4,5,SUD);
+Boat* Catamaran = BoatSpawner(8,9,EST);
+AppendBoatList(&Liste,Catamaran);
+AppendBoatList(&Liste,Voilier);
+printf("On affiche la Liste qui a 2 elements \n");
+void VisualiserBoatList(Liste);
+BoatEater(&Liste, Catamaran);
+printf("On affiche la liste qui n'a plus qu'un element);
+VisualiserBoatList(Liste);
+
 
 	return 0;
 }
