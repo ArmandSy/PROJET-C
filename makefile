@@ -2,11 +2,15 @@ all: PROJET EXECUTION
 
 affichage.o: affichage.c affichage.h librairies.h
 	gcc -c -Wall affichage.c
-mouvements.o: mouvements.c mouvements.h librairies.h
-	gcc -c -Wall mouvements.c
-main.o: main.c affichage.h mouvements.h
+boats.o: boats.c boats.h librairies.h
+	gcc -c -Wall boats.c
+trafficlights.o: trafficlights.c trafficlights.h librairies.h
+	gcc -c -Wall trafficlights.c
+vehicules.o: vehicules.c vehicules.h librairies.h
+	gcc -c -Wall vehicules.c
+main.o: main.c affichage.h boats.h trafficlights.h vehicules.h
 	gcc -c -Wall main.c
-PROJET: affichage.o mouvements.o main.o 
-	gcc -o PROJET main.o affichage.o mouvements.o
+PROJET: affichage.o boats.o trafficlights.o vehicules.o main.o 
+	gcc -o PROJET main.o affichage.o boats.o trafficlights.o vehicules.o
 EXECUTION: 
 	./PROJET

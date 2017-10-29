@@ -1,6 +1,8 @@
 #include "librairies.h"
 #include "affichage.h"
-#include "mouvements.h"
+#include "boats.h"
+#include "trafficlights.h"
+#include "vehicules.h"
 
 int main()
 {
@@ -46,6 +48,8 @@ printf("fin du programme \n");
 
 //TESTS RELATIFS AUX BATEAUUUUUUUX
 
+/*
+
 BoatList* Liste = NULL;
 Boat* Voilier = BoatSpawner(4,5,SUD);
 Boat* Catamaran = BoatSpawner(8,9,EST);
@@ -56,6 +60,7 @@ void VisualiserBoatList(Liste);
 BoatEater(&Liste, Catamaran);
 printf("On affiche la liste qui n'a plus qu'un element);
 VisualiserBoatList(Liste);
+*/
 
 
 	return 0;
