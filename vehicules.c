@@ -27,6 +27,38 @@ Position* PositionFuture(Vehicule* vehicule)
 	}
 }
 
+void NewPositionVehicule(Vehicule* vehicule)
+{
+	vehicule->posX = PositionFuture(vehicule)->posX;
+	vehicule->posY = PositionFuture(vehicule)->posY;
+}
+
+
+void RoulementVehiculePositionListAndMatrix(char** MatriceDecision, char** MatricePositionVehicules, VehiculeList **List)
+{
+	VehiculeList *tmp;
+	tmp = *List;
+	while (tmp != NULL)
+		{
+			if(MatricePositionVehicules[PositionFuture(tmp->Vehicule)->posX][PositionFuture(tmp->Vehicule)->posY]=='o')
+			{
+				MatricePositionVehicules[tmp->Vehicule->posX][tmp->Vehicule->posY]='o'; //La ou la voiture etait devient de la route (place libre)
+				NewPositionVehicule(tmp->Vehicule); //On actualise la position de la voiture dans la structure
+				NewVehiculeDirection(tmp->Vehicule,MatriceDecision, *List); //On actualise la Direction de la voiture en fonction de la MatriceDecision
+				MatricePositionVehicules[tmp->Vehicule->posX][tmp->Vehicule->posY]='c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
+			}
+			else if(MatricePositionVehicules[PositionFuture(tmp->Vehicule)->posX][PositionFuture(tmp->Vehicule)->posY]=='c')
+			{
+
+			}
+			else if(MatricePositionVehicules[PositionFuture(tmp->Vehicule)->posX][PositionFuture(tmp->Vehicule)->posY]=='f')
+			{
+
+			}
+		}
+}
+
+
 void VehiculeEater(VehiculeList **List, Vehicule* Vehicule)
 {
 	VehiculeList* PointeurCourant;
@@ -43,6 +75,7 @@ void VehiculeEater(VehiculeList **List, Vehicule* Vehicule)
 								}
 						}
 }
+
 	
 void AppendVehiculeList(VehiculeList **List, Vehicule* Vehicule)
 {
@@ -74,9 +107,9 @@ void VisualiserVehiculeList(VehiculeList *List)
 		}
 }
 
-void Decision(Vehicule* Vehicule, char ** map)
+void NewVehiculeDirection(Vehicule* Vehicule, char ** MatriceDecision, VehiculeList *ListeDesVehicules)
 {
-	switch(map[Vehicule->posX][Vehicule->posY])
+	switch(MatriceDecision[Vehicule->posX][Vehicule->posY])
 	{
 	
 	case 'd':
@@ -95,8 +128,11 @@ void Decision(Vehicule* Vehicule, char ** map)
 		Vehicule->Direction = DirectionAleatoire(OUEST,NORD); break;
 	case 'y':
 		Vehicule->Direction = DirectionAleatoire(EST,SUD); break;
+	case 'E':
+		VehiculeEater(&ListeDesVehicules,Vehicule);
 	}
 }
+
 Direction DirectionAleatoire(Direction A, Direction B)
 {
 	int i = rand()%2;
@@ -107,20 +143,9 @@ Direction DirectionAleatoire(Direction A, Direction B)
 }
 
 
-/*
-
-void Deplacement(Vehicule* Vehicule)
-{
-	PlaceTerminale(PositionFuture(Vehicule)->posX,PositionFuture(Vehicule)->posY);
-	printf("%c",Vehicule.custom);
-	Vehicule->posX = PositionFuture(Vehicule)->posX;
-	Vehicule->posY = PositionFuture(Vehicule)->posY;
-}
-
-*/
-
 void PlaceTerminale(int posX, int posY)
 {
 	printf("\33[%d;%dH",posX,posY);
 }
 	
+

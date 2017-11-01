@@ -5,8 +5,8 @@
 #include "vehicules.h"
 #include "decision.h"
 
-#define NBRCOL 194 
-#define NBRLINE 65
+#define NBC 194 
+#define NBL 65
 
 int main()
 {
@@ -74,20 +74,39 @@ OK
 
 */
 
+
 //TESTS RELATIFS A LA DECISION
 
+/*
+char ** MatriceDecision = MatrixInit(NBC, NBL);
 
-char ** MATRIX = MATRIX_INIT(NBRCOL, NBRLINE);
+TextToMatrix(NBC, NBL, MatriceDecision, "dec.txt");
 
-TEXT_TO_MATRIX(NBRCOL, NBRLINE, MATRIX);
+ShowMatrix(NBC, NBL, MatriceDecision);
 
-AFFICHAGE_MATRIX(NBRCOL, NBRLINE, MATRIX);
-
-RoulementFeuxDecision(NBRCOL, NBRLINE,MATRIX);
+RoulementFeuxDecision(NBC, NBL,MatriceDecision);
 
 printf("\n\n\n\n");
 
-AFFICHAGE_MATRIX(NBRCOL, NBRLINE, MATRIX);
+ShowMatrix(NBC, NBL, MatriceDecision);
+
+OK
+
+*/
+
+
+//TESTS RELATIFS AUX VEHICULES
+/*
+
+char ** MatricePositionVehicules = MatrixInit(NBC, NBL);
+
+TextToMatrix(NBC, NBL, MatricePositionVehicules, "MatricePositionVehicules.txt");
+
+ShowMatrix(NBC, NBL, MatricePositionVehicules);
+
+PAS ENCORE FAIT/FINI
+
+*/
 
 
 	return 0;

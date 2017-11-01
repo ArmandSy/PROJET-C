@@ -67,10 +67,12 @@ Vehicule* VehiculeSpawner(int posX, int posY,Direction Direction); //renvoie un 
 
 void VisualiserVehiculeList(VehiculeList *List); //permet de visualiser une liste de vehicules (affiche les positions de ces vehicules)
 
-void Decision(Vehicule* Vehicule, char ** map); //Fonction determinant la direction future de la voiture en fonction de la case sur laquelle elle se trouve (carrefour, ou route) /!\ Etablir un code permettant de faire la disjonction de cas de cette fonction
+void NewVehiculeDirection(Vehicule* Vehicule, char ** MatriceDecision, VehiculeList *ListeDesVehicules); //Fonction determinant la direction future de la voiture en fonction de la case sur laquelle elle se trouve (carrefour, ou route) /!\ Etablir un code permettant de faire la disjonction de cas de cette fonction
 
 void Deplacement(Vehicule* Vehicule); //Affiche le vehicule a sa prochaine position dans le terminal
 
 Direction DirectionAleatoire(Direction A, Direction B);
 
 void PlaceTerminale(int posX, int posY); //Fonction permettant de s'éviter la syntaxe trop lourde du placement du curseur dans le terminal
+
+void NewPositionVehicule(Vehicule* vehicule); //Met a jour la position de la voiture dans sa struct
