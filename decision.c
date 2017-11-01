@@ -1,5 +1,6 @@
 #include "librairies.h"
 #include "decision.h"
+
 char** MATRIX_INIT(int NBC, int NBL)
 {
 	int i;
@@ -16,9 +17,11 @@ void TEXT_TO_MATRIX(int NBC, int NBL, char** MATRIX)
 	int i;	
 	FILE* fichier = NULL;
 	fichier=fopen("dec.txt", "r");
+	size_t nombrecolomn = (size_t)NBC;
 	for(i=0; i<NBL; i++)
 	{		
-			fgets(MATRIX[i], NBC, fichier);
+			getline(&MATRIX[i], &nombrecolomn, fichier);
+
 	}
 	fclose(fichier);
 }
@@ -26,14 +29,11 @@ void TEXT_TO_MATRIX(int NBC, int NBL, char** MATRIX)
 void AFFICHAGE_MATRIX(int NBC, int NBL, char** MATRIX)
 {
 	int i;
-	int j;
-	for(i = 0; i<NBL; i++)
+	for(i = 0; i < NBL; i++)
 	{
-		for(j = 0; j<NBC ; j++)
-			{
-				printf("%c",MATRIX[i][j]);
-			}
+		printf("%s", MATRIX[i]);
 	}
+	printf("\nfin affichage\n");
 }
 	
 char swap(char a)
@@ -47,13 +47,13 @@ char swap(char a)
 	}
 }
 
-void RoulementFeuxDecision(char ** MATRIX, int NBL, int NBC)
+void RoulementFeuxDecision(int NBC, int NBL, char ** MATRIX)
 {
 	int i;
 	int j;
-	for(i=0; i<NBL; i++)
+	for(i=0; i < NBL; i++)
 	{
-		for(j=0; j<NBC; j++)
+		for(j=0; j < NBC; j++)
 			{
 				if(MATRIX[i][j]=='o')
 					{
@@ -64,6 +64,8 @@ void RoulementFeuxDecision(char ** MATRIX, int NBL, int NBC)
 						MATRIX[i][j]='o';
 					}
 			}
+			
+		//printf("caca%d %s\n", i, MATRIX[i]);
 	}
 }		
 

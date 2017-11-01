@@ -8,6 +8,5 @@ void AFFICHAGE_MATRIX(int NBC, int NBL, char** MATRIX); //Fonction affichant une
 
 char swap(char); // ouvre ou ferme "la porte" (feu) sur le char **
 
-void RoulementFeuxDecision(char ** MATRIX, int NBL, int NBC); // Effectue un roulement des feux sur le tableau (ferme/ouvre les portes) A appeler avec RoulementFeux qui porte sur la liste des feux
-
+void RoulementFeuxDecision(int NBC, int NBL, char ** MATRIX); // Effectue un roulement des feux sur le tableau (ferme/ouvre les portes) A appeler avec RoulementFeux qui porte sur la liste des feux
 
