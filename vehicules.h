@@ -1,15 +1,5 @@
 #include "librairies.h"
 
-enum Direction // Enumeration des directions possibles pour un vehicule
-{
-	NORD,
-	EST,
-	OUEST,
-	SUD,
-};
-
-typedef enum Direction Direction;
-
 enum type	// Enumeration des differents types de vehicules
 {
 	Jaguar,
@@ -31,7 +21,16 @@ enum Carburant	// Enumeration des differents etats du carburant pour un vehicule
 	PLEIN,
 };
 
-typedef enum Carburant Carburant;
+
+enum Direction // Enumeration des directions possibles pour une entité
+{
+	NORD,
+	EST,
+	OUEST,
+	SUD,
+};
+
+typedef enum Direction Direction;
 
 typedef struct Position
 {
@@ -40,6 +39,8 @@ typedef struct Position
 			
 } Position;
 
+typedef enum Carburant Carburant;
+
 typedef struct Vehicule
 {
 	Direction Direction;
@@ -47,6 +48,7 @@ typedef struct Vehicule
 	int posY;
 	int vitesse;
 	char custom[30];
+	char CaseDecision;
 	Carburant Carburant;
 			
 } Vehicule;
@@ -63,7 +65,7 @@ void VehiculeEater(VehiculeList **List, Vehicule* Vehicule); //Fonction ayant po
 
 void AppendVehiculeList(VehiculeList **List, Vehicule* Vehicule); //Fonction permettant d'ajouter un Vehicule à la liste des Vehicules (à appeler après le Spawner)
 
-Vehicule* VehiculeSpawner(int posX, int posY,Direction Direction); //renvoie un pointeur de vehicule ayant pour position (x,y) et pour Direction Direction
+Vehicule* VehiculeSpawner(int posX, int posY, Direction Direction, char** MatriceDecision, VehiculeList* ListeDesVehicules); //renvoie un pointeur de vehicule ayant pour position (x,y) et pour Direction Direction
 
 void VisualiserVehiculeList(VehiculeList *List); //permet de visualiser une liste de vehicules (affiche les positions de ces vehicules)
 
@@ -76,3 +78,5 @@ Direction DirectionAleatoire(Direction A, Direction B);
 void PlaceTerminale(int posX, int posY); //Fonction permettant de s'éviter la syntaxe trop lourde du placement du curseur dans le terminal
 
 void NewPositionVehicule(Vehicule* vehicule); //Met a jour la position de la voiture dans sa struct
+
+void RoulementVehiculesPosition(char** MatriceDecision, VehiculeList **List); //Actualise la position des vehicules

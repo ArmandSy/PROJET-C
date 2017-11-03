@@ -5,9 +5,6 @@
 #include "vehicules.h"
 #include "decision.h"
 
-#define NBC 194 
-#define NBL 65
-
 int main()
 {
 	/* TESTS RELATIFS à L'AFFICHAGE
@@ -77,22 +74,20 @@ OK
 
 //TESTS RELATIFS A LA DECISION
 
-/*
-char ** MatriceDecision = MatrixInit(NBC, NBL);
 
-TextToMatrix(NBC, NBL, MatriceDecision, "dec.txt");
+char ** MatriceDecision = MatrixInit();
 
-ShowMatrix(NBC, NBL, MatriceDecision);
+TextToMatrix(MatriceDecision, "dec.txt");
 
-RoulementFeuxDecision(NBC, NBL,MatriceDecision);
+ShowMatrix(MatriceDecision);
+
+RoulementFeuxDecision(MatriceDecision);
 
 printf("\n\n\n\n");
 
-ShowMatrix(NBC, NBL, MatriceDecision);
+ShowMatrix(MatriceDecision);
 
-OK
 
-*/
 
 
 //TESTS RELATIFS AUX VEHICULES

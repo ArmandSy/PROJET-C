@@ -1,24 +1,24 @@
 #include "librairies.h"
 #include "decision.h"
 
-char** MatrixInit(int NBC, int NBL)
+char** MatrixInit()
 {
 	int i;
 	char** Matrice = calloc(NBL, sizeof(char*));
-	for(i = 0; i<NBL; i++)
+	for(i = 0; i<NBL; i++) 
 	{
 		Matrice[i] = calloc(NBC, sizeof(char));
 	}
 	return Matrice;
 }
 
-void TextToMatrix(int NBC, int NBL, char** Matrice, char* nomdufichiertexte)
+void TextToMatrix(char** Matrice, char* nomdufichiertexte)
 {
 	int i;	
 	FILE* fichier = NULL;
 	fichier=fopen(nomdufichiertexte, "r");
 	size_t nombrecolomn = (size_t)NBC;
-	for(i=0; i<NBL; i++)
+	for(i=0; i<NBL; i++) 
 	{		
 			getline(&Matrice[i], &nombrecolomn, fichier);
 
@@ -28,7 +28,7 @@ void TextToMatrix(int NBC, int NBL, char** Matrice, char* nomdufichiertexte)
 
 
 
-void ShowMatrix(int NBC, int NBL, char** Matrice)
+void ShowMatrix(char** Matrice)
 {
 	int i;
 	for(i = 0; i < NBL; i++)
@@ -38,18 +38,7 @@ void ShowMatrix(int NBC, int NBL, char** Matrice)
 	printf("\nfin affichage\n");
 }
 	
-char swap(char a)
-{
-	if(a=='o')
-		{
-			return 'f';
-		}
-	else{
-		return 'o';
-	}
-}
-
-void RoulementFeuxDecision(int NBC, int NBL, char ** Matrice)
+void RoulementFeuxDecision(char ** Matrice)
 {
 	int i;
 	int j;

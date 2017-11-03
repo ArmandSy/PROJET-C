@@ -34,26 +34,26 @@ void NewPositionVehicule(Vehicule* vehicule)
 }
 
 
-void RoulementVehiculePositionListAndMatrix(char** MatriceDecision, char** MatricePositionVehicules, VehiculeList **List)
+void RoulementVehiculesPosition(char** MatriceDecision, VehiculeList **List)
 {
 	VehiculeList *tmp;
 	tmp = *List;
 	while (tmp != NULL)
-		{
-			if(MatricePositionVehicules[PositionFuture(tmp->Vehicule)->posX][PositionFuture(tmp->Vehicule)->posY]=='o')
+		{	
+			NewVehiculeDirection(tmp->Vehicule,MatriceDecision, *List); //On actualise la Direction du vehicule
+			if(MatriceDecision[PositionFuture(tmp->Vehicule)->posX][PositionFuture(tmp->Vehicule)->posY]!=('f'||'c'))
 			{
-				MatricePositionVehicules[tmp->Vehicule->posX][tmp->Vehicule->posY]='o'; //La ou la voiture etait devient de la route (place libre)
-				NewPositionVehicule(tmp->Vehicule); //On actualise la position de la voiture dans la structure
-				NewVehiculeDirection(tmp->Vehicule,MatriceDecision, *List); //On actualise la Direction de la voiture en fonction de la MatriceDecision
-				MatricePositionVehicules[tmp->Vehicule->posX][tmp->Vehicule->posY]='c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
+				MatriceDecision[tmp->Vehicule->posX][tmp->Vehicule->posY]=tmp->Vehicule->CaseDecision; //La ou la voiture etait devient de la route (place libre)
+				NewPositionVehicule(tmp->Vehicule); //On actualise la position de la voiture dans la structure 
+				tmp->Vehicule->CaseDecision = MatriceDecision[tmp->Vehicule->posX][tmp->Vehicule->posY]; //On recupere la case de decision pour la mettre dans la struct
+				MatriceDecision[tmp->Vehicule->posX][tmp->Vehicule->posY]='c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
+				//ON PEUT PRINTF LA VOITURE ICI EN SOIT
+				tmp = tmp->next;
 			}
-			else if(MatricePositionVehicules[PositionFuture(tmp->Vehicule)->posX][PositionFuture(tmp->Vehicule)->posY]=='c')
+			else 
 			{
-
-			}
-			else if(MatricePositionVehicules[PositionFuture(tmp->Vehicule)->posX][PositionFuture(tmp->Vehicule)->posY]=='f')
-			{
-
+				//PRINTF LA VOITURE A SA MEME POSITION
+				tmp = tmp->next;
 			}
 		}
 }
@@ -77,34 +77,38 @@ void VehiculeEater(VehiculeList **List, Vehicule* Vehicule)
 }
 
 	
-void AppendVehiculeList(VehiculeList **List, Vehicule* Vehicule)
+void AppendVehiculeList(VehiculeList** ListeDesVehicules, Vehicule* Vehicule)
 {
 	VehiculeList *element;
 	element = malloc(sizeof(*element));
 	element->Vehicule = Vehicule;
-	element->next = *List;
-	*List = element;
+	element->next = *ListeDesVehicules;
+	*ListeDesVehicules = element;
 }
 
-Vehicule* VehiculeSpawner(int posX, int posY, Direction Direction)
+Vehicule* VehiculeSpawner(int posX, int posY, Direction Direction, char** MatriceDecision, VehiculeList* ListeDesVehicules)
 {
-	Vehicule* Veh=malloc(sizeof(Vehicule));
-	Veh->posX=posX;
-	Veh->posY=posY;
-	Veh->Direction=Direction;
-	return Veh;
+	Vehicule* Vehicule = malloc(sizeof(Vehicule));
+	Vehicule->posX = posX;
+	Vehicule->posY = posY;
+	Vehicule->Direction = Direction;
+	Vehicule->CaseDecision = 'E';
+	MatriceDecision[posX][posY]='c';
+	AppendVehiculeList(&ListeDesVehicules, Vehicule);
+	return Vehicule;
 }
+
 
 void VisualiserVehiculeList(VehiculeList *List)
 {
 	VehiculeList *tmp;
 	tmp = List;
-	while (tmp != NULL)
-		{
+
+	while (tmp != NULL) {
 			printf("posX:%d\n",tmp->Vehicule->posX);
 			printf("posY:%d\n",tmp->Vehicule->posY);
 			tmp = tmp->next;
-		}
+	}
 }
 
 void NewVehiculeDirection(Vehicule* Vehicule, char ** MatriceDecision, VehiculeList *ListeDesVehicules)
@@ -136,10 +140,12 @@ void NewVehiculeDirection(Vehicule* Vehicule, char ** MatriceDecision, VehiculeL
 Direction DirectionAleatoire(Direction A, Direction B)
 {
 	int i = rand()%2;
-	if (i%2==0){
-			return A;}
-	else{
-			return B;}
+	if (i%2==0) {
+			return A;
+	}
+	else {
+			return B;
+	}
 }
 
 
@@ -147,5 +153,4 @@ void PlaceTerminale(int posX, int posY)
 {
 	printf("\33[%d;%dH",posX,posY);
 }
-	
 

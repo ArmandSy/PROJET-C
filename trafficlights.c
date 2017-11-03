@@ -28,14 +28,13 @@ void VisualiserTrafficLightList(TrafficLightList *List)
 {
 	TrafficLightList *tmp;
 	tmp = List;
-	while (tmp != NULL)
-		{
+	while (tmp != NULL)	{
 			printf("Position en X:%d\n", tmp->TrafficLight->posX);
 			printf("Position en Y:%d\n", tmp->TrafficLight->posY);
 			printf("Couleur Courrante: %d \n",tmp->TrafficLight->Current_Color);
 			printf("Temps requis pour changer de couleur: %d \n",tmp->TrafficLight->TimeForSwitch);
 			tmp = tmp->next;
-		}
+						}
 }
 
 void ShowTrafficLight(TrafficLight Feu)
@@ -53,7 +52,6 @@ clock_t StartChrono(double* montre)
 	clock_t temps;
 	double Chrono = temps / CLOCKS_PER_SEC;
 	*montre = Chrono;
-	}
 }
 
 double VisualiserChrono(double* montre)
@@ -67,12 +65,12 @@ void Roulement_feux(TrafficLightList *List)
 {
 	TrafficLightList *tmp;
 	tmp = List;
-	while(tmp != NULL)
-		{
+	while(tmp != NULL) 
+	{
 			tmp->TrafficLight->Current_Color+=1%4;
 			tmp->TrafficLight->TimeForSwitch+=1%4;
 			tmp = tmp->next;
-		}
+	}
 }
 
 /* A TESTER, pas sûr que ça fonctionne mais l'idée de cette fonction simplifierait grandement le fonctionnement des feux
@@ -80,11 +78,11 @@ void Roulement_feux(TrafficLightList *List)
 void GestionDesFeux(TrafficLightList *List)
 {
 	clock_t temps = 0;
-	if((double)temps / CLOCKS_PER_SEC >= (List->TrafficLight->TimeForSwitch))
-		{
+	
+	if((double)temps / CLOCKS_PER_SEC >= (List->TrafficLight->TimeForSwitch)) {
 			Roulement_feux(List);
 			GestionDesFeux(List);	
-		}
+	}
 }
 
 */
