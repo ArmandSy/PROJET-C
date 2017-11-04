@@ -19,13 +19,13 @@ int main()
 // TESTS RELATIFS AUX FEUX
 /*
 TrafficLightList* Liste=NULL;
-TrafficLight* FEU1 = CreateTrafficLight(4, 5, VERT);
-TrafficLight* FEU2 = CreateTrafficLight(3, 6, ROUGE);
-AppendList(&Liste, FEU1);
-AppendList(&Liste, FEU2);
-VisualiserTrafficLightList(Liste);	
-Roulement_feux(Liste);
-VisualiserTrafficLightList(Liste);
+TrafficLight* FEU1 = createTrafficLight(4, 5, VERT);
+TrafficLight* FEU2 = createTrafficLight(3, 6, ROUGE);
+appendTrafficLightList(&Liste, FEU1);
+appendTrafficLightList(&Liste, FEU2);
+visualiserTrafficLightList(Liste);	
+roulement_feux(Liste);
+visualiserTrafficLightList(Liste);
 
 OK
 
@@ -33,39 +33,41 @@ OK
 
 
 // TESTS RELATIFS AUX VEHICULES 
-
 /*
-VehiculeList* Liste = NULL;
-Vehicule* Vehicule1 = VehiculeSpawner(4,3,NORD);
-Vehicule* Vehicule2 = VehiculeSpawner(6,7,SUD);
 
-AppendVehiculeList(&Liste,Vehicule1);
-AppendVehiculeList(&Liste,Vehicule2);
+VehiculeList* Liste = NULL;
+Vehicule* Vehicule1 = oldVehiculeSpawner(4,3,NORD);
+Vehicule* Vehicule2 = oldVehiculeSpawner(6,7,SUD);
+
+appendVehiculeList(&Liste,Vehicule1);
+appendVehiculeList(&Liste,Vehicule2);
 
 printf("Visualisation de la liste remplie:\n");
-VisualiserVehiculeList(Liste);
+visualiserVehiculeList(Liste);
 printf("On retire now Vehicule 1 puis on affiche la liste\n");
-VehiculeEater(&Liste, Vehicule1);
-VisualiserVehiculeList(Liste);
+vehiculeEater(&Liste, Vehicule1);
+visualiserVehiculeList(Liste);
 printf("fin du programme \n");
 
 OK
+
 */
+
 
 //TESTS RELATIFS AUX BATEAUUUUUUUX
 
 
 /*
 BoatList* Liste = NULL;
-Boat* Voilier = BoatSpawner(4,5,SUD);
-Boat* Catamaran = BoatSpawner(8,9,EST);
-AppendBoatList(&Liste,Catamaran);
-AppendBoatList(&Liste,Voilier);
+Boat* Voilier = boatSpawner(4,5,SUD);
+Boat* Catamaran = oatSpawner(8,9,EST);
+appendBoatList(&Liste,Catamaran);
+appendBoatList(&Liste,Voilier);
 printf("On affiche la Liste qui a 2 elements \n");
-VisualiserBoatList(Liste);
-BoatEater(&Liste, Catamaran);
+visualiserBoatList(Liste);
+boatEater(&Liste, Catamaran);
 printf("On affiche la liste qui n'a plus qu'un element\n");
-VisualiserBoatList(Liste);
+visualiserBoatList(Liste);
 
 OK
 
@@ -74,35 +76,70 @@ OK
 
 //TESTS RELATIFS A LA DECISION
 
+/*
 
 char ** MatriceDecision = MatrixInit();
 
-TextToMatrix(MatriceDecision, "dec.txt");
+textToMatrix(MatriceDecision, "dec.txt");
 
-ShowMatrix(MatriceDecision);
+showMatrix(MatriceDecision);
 
-RoulementFeuxDecision(MatriceDecision);
+roulementFeuxDecision(MatriceDecision);
 
 printf("\n\n\n\n");
 
-ShowMatrix(MatriceDecision);
+showMatrix(MatriceDecision);
 
-
-
-
-//TESTS RELATIFS AUX VEHICULES
-/*
-
-char ** MatricePositionVehicules = MatrixInit(NBC, NBL);
-
-TextToMatrix(NBC, NBL, MatricePositionVehicules, "MatricePositionVehicules.txt");
-
-ShowMatrix(NBC, NBL, MatricePositionVehicules);
-
-PAS ENCORE FAIT/FINI
+OK
 
 */
 
+
+
+
+//TESTS RELATIFS AUX VEHICULES ET A LEURS MOUVEMENTS
+
+/*
+
+srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
+
+char ** MatriceDecision = matrixInit(NBC, NBL);
+
+textToMatrix(MatriceDecision, "dec.txt");
+
+showMatrix(MatriceDecision);
+
+VehiculeList* ListeDesVehicules = NULL;
+
+vehiculeSpawner(20, 193, OUEST, MatriceDecision, &ListeDesVehicules);
+
+roulementVehiculesPosition(MatriceDecision, &ListeDesVehicules);
+
+showMatrix(MatriceDecision);
+
+OK FONCTIONNE ! Meme les virages (:
+
+*/
+
+//TESTS RELATIFS AUX BATEAUX ET A LEURS MOUVEMENTS
+
+srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
+
+char ** MatriceDecision = matrixInit(NBC, NBL);
+
+textToMatrix(MatriceDecision, "dec.txt");
+
+showMatrix(MatriceDecision);
+
+BoatList* ListeDesBoats = NULL;
+
+boatSpawner(22, 1, DROITE, MatriceDecision, &ListeDesBoats);
+
+/*
+roulementBoatsPosition(MatriceDecision, &ListeDesBoats);
+
+showMatrix(MatriceDecision);
+*/
 
 	return 0;
 }

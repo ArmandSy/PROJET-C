@@ -4,7 +4,7 @@
 
 // FONCTIONS RELATIVES AUX FEUX
 
-TrafficLight* CreateTrafficLight(int posX, int posY, Color color)
+TrafficLight* createTrafficLight(int posX, int posY, Color color)
 {
 	TrafficLight* Traffic=malloc(sizeof(TrafficLight));
 	Traffic->posX=posX;
@@ -15,7 +15,7 @@ TrafficLight* CreateTrafficLight(int posX, int posY, Color color)
 }
 
 
-void AppendList(TrafficLightList **List, TrafficLight *TrafficLight)
+void appendTrafficLightList(TrafficLightList **List, TrafficLight *TrafficLight)
 {
 	TrafficLightList *element;
 	element = malloc(sizeof(*element));
@@ -24,7 +24,7 @@ void AppendList(TrafficLightList **List, TrafficLight *TrafficLight)
 	*List = element;
 }	
 
-void VisualiserTrafficLightList(TrafficLightList *List)
+void visualiserTrafficLightList(TrafficLightList *List)
 {
 	TrafficLightList *tmp;
 	tmp = List;
@@ -37,7 +37,7 @@ void VisualiserTrafficLightList(TrafficLightList *List)
 						}
 }
 
-void ShowTrafficLight(TrafficLight Feu)
+void showTrafficLight(TrafficLight Feu)
 {
 	printf("Position en X: %d \n", Feu.posX);
 	printf("Position en Y: %d \n", Feu.posY);
@@ -47,21 +47,21 @@ void ShowTrafficLight(TrafficLight Feu)
 
 
 /*
-clock_t StartChrono(double* montre)
+clock_t startChrono(double* montre)
 {
 	clock_t temps;
 	double Chrono = temps / CLOCKS_PER_SEC;
 	*montre = Chrono;
 }
 
-double VisualiserChrono(double* montre)
+double visualiserChrono(double* montre)
 {
 	return *montre;
 }	
 */	
 	
 
-void Roulement_feux(TrafficLightList *List)
+void roulementFeux(TrafficLightList *List)
 {
 	TrafficLightList *tmp;
 	tmp = List;

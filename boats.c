@@ -3,29 +3,27 @@
 
 // FONCTIONS RELATIVES AUX BATEAUX ET A LEURS DECISIONS
 
-Boat* BoatSpawner(int posX, int posY, Sens Sens, char** MatriceDecision, BoatList* ListeDesBoats)
+void boatSpawner(int posX, int posY, Sens Sens, char** MatriceDecision, BoatList** ListeDesBoats)
 {
 	Boat* Boat = malloc(sizeof(Boat));
 	Boat->posX = posX;
 	Boat->posY = posY;
 	Boat->Sens = Sens;
-	Boat->CaseDecision = 'E';
+	Boat->CaseDecision = 'S';
 	MatriceDecision[posX][posY] = 'L';
-	AppendBoatList(&ListeDesBoats, Boat);
-	return Boat;
+	appendBoatList(ListeDesBoats, Boat);
 }
 
-
-void AppendBoatList(BoatList **List,Boat* Boat)
+void appendBoatList(BoatList **ListeDesBoats,Boat* Boat)
 {
 	BoatList *element;
-	element = malloc(sizeof(*element));
+	element = calloc(1,sizeof(*element));
 	element->Boat = Boat;
-	element->next = *List;
-	*List = element;
+	element->next = *ListeDesBoats;
+	*ListeDesBoats = element;
 }
 
-void BoatEater(BoatList **List, Boat* Boat)
+void boatEater(BoatList **List, Boat* Boat)
 {
 	BoatList* PointeurCourant;
 	BoatList* PointeurPrecedent;
@@ -42,7 +40,7 @@ void BoatEater(BoatList **List, Boat* Boat)
 						}
 }
 
-void VisualiserBoatList(BoatList *List)
+void visualiserBoatList(BoatList *List)
 {
 	BoatList *tmp;
 	tmp = List;
@@ -54,7 +52,7 @@ void VisualiserBoatList(BoatList *List)
 		}
 }
 
-Sens SensAleatoire(Sens A, Sens B)
+Sens sensAleatoire(Sens A, Sens B)
 {
 	int i = rand()%2;
 	if (i%2==0) 
@@ -66,13 +64,13 @@ Sens SensAleatoire(Sens A, Sens B)
 		}
 }
 
-void NewPositionBoat(Boat* Boat)
+void setNewPositionBoat(Boat* Boat)
 {
-	Boat->posX = PositionFutureBoat(Boat)->posX;
-	Boat->posY = PositionFutureBoat(Boat)->posY;
+	Boat->posX = positionFutureBoat(Boat)->posX;
+	Boat->posY = positionFutureBoat(Boat)->posY;
 }
 	
-void NewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats)
+void setNewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats)
 {
 	switch(MatriceDecision[Boat->posX][Boat->posY])
 	{
@@ -85,61 +83,66 @@ void NewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats)
 	case 'g':
 		Boat->Sens = GAUCHE; break;
 	case 'x':
-		Boat->Sens = SensAleatoire(GAUCHE,HAUT); break;
+		Boat->Sens = sensAleatoire(GAUCHE,HAUT); break;
 	case 'y':
-		Boat->Sens = SensAleatoire(DROITE,BAS); break;
+		Boat->Sens = sensAleatoire(DROITE,BAS); break;
 	case 'E':
-		BoatEater(&ListeDesBoats,Boat);
+		boatEater(&ListeDesBoats,Boat);
 	}
 }
 
-void RoulementBoatsPosition(char** MatriceDecision, BoatList **List)
-{
-	BoatList *tmp;
-	tmp = *List;
-	while (tmp != NULL)
-		{	
-			NewBoatSens(tmp->Boat,MatriceDecision, *List); //On actualise la Direction du Boat
-			if(MatriceDecision[PositionFutureBoat(tmp->Boat)->posX][PositionFutureBoat(tmp->Boat)->posY]!='L') //On décrete qu'un bateau est representé par un L sur la MatriceDecision
-			{
-				MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]=tmp->Boat->CaseDecision; //La ou le bateau etait devient de l'eau (place libre)
-				NewPositionBoat(tmp->Boat); //On actualise la position du bateau dans la structure 
-				tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //On recupere la case de decision pour la mettre dans la struct
-				MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]='L'; //On actualise la MatriceDecision pour signaler qu'un Boat se trouve maintenant a cette position
-				//ON PEUT PRINTF LE BOAT ICI EN SOIT
-				tmp = tmp->next;
-			}
-			else 
-			{
-				//PRINTF LE BOAT A SA MEME POSITION
-				tmp = tmp->next;
-			}
-		}
-}
-
-Coordonnees* PositionFutureBoat(Boat* Boat)
+Coordonnees* positionFutureBoat(Boat* Boat)
 {
 	Coordonnees* Coordonnees = NULL;
 	switch(Boat->Sens) 
 	{
 		case HAUT: 
+			Coordonnees->posX = (Boat->posX)-1;
+			Coordonnees->posY = Boat->posY;
+			return Coordonnees;
+		case DROITE: 
 			Coordonnees->posX = Boat->posX;
 			Coordonnees->posY = (Boat->posY)+1;
 			return Coordonnees;
-		case DROITE: 
-			Coordonnees->posX=(Boat->posX)+1;
-			Coordonnees->posY=Boat->posY;
-			return Coordonnees;
 		case GAUCHE: 
-			Coordonnees->posX=(Boat->posX)-1;
-			Coordonnees->posY=Boat->posY;
+			Coordonnees->posX = Boat->posX;
+			Coordonnees->posY = (Boat->posY)-1;
 			return Coordonnees;
-		default: 
-			Coordonnees->posX=Boat->posX;
-			Coordonnees->posY=(Boat->posY)-1;
+		case BAS: 
+			Coordonnees->posX = (Boat->posX)+1;
+			Coordonnees->posY = Boat->posY;
 			return Coordonnees;
+		default:
+			Coordonnees->posX = Boat->posX;
+			Coordonnees->posY = Boat->posY;
+			return Coordonnees;
+
 	}
 }
 
-
+void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
+{
+	BoatList *tmp;
+	tmp = *ListeDesBoats;
+	while (tmp !=NULL)
+	{
+		Coordonnees* NextCoordonnees = positionFutureBoat(tmp->Boat); //astuce pour bien gerer la memoire et free apres
+		if(MatriceDecision[NextCoordonnees->posX][NextCoordonnees->posY]!='L')
+		{
+			MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = tmp->Boat->CaseDecision; //La case ou se trouvait le bateau redevient de l'eau
+			setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
+			tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
+			setNewBoatSens(tmp->Boat, MatriceDecision, *ListeDesBoats); //Mise a jour de la Direction du Bateau en fonction de la ou il se situe sur la MatriceDecison
+			MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'L'; // Mise a jour de la MatriceDecison
+			//ON PEUT PRINTF LE BATEAU ICI EN SOIT
+			tmp = tmp->next;
+		}
+		else
+		{
+			//ON PRINTF LE BATEAU AU MEME ENDROIT
+			tmp = tmp->next;
+		}
+		free(NextCoordonnees);
+	}
+}
 

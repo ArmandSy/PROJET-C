@@ -44,20 +44,20 @@ typedef struct BoatList // Liste chainee des Bateaux
 	struct BoatList *next;
 } BoatList;
 
-Boat* BoatSpawner(int posX, int posY, Sens Sens, char** MatriceDecision, BoatList* ListeDesBoats); //Fonction initialisant un Bateau allant dans la Direction Direction a la position (posX,posY)
+void boatSpawner(int posX, int posY, Sens Sens, char** MatriceDecision, BoatList** ListeDesBoats); //Fonction initialisant un Bateau allant dans la Direction Direction a la position (posX,posY)
 
-void AppendBoatList(BoatList **List,Boat* Boat); //Fonction ajoutant un Boat a une BoatList
+void appendBoatList(BoatList **List,Boat* Boat); //Fonction ajoutant un Boat a une BoatList
 
-void BoatEater(BoatList **List, Boat* Boat); //Supprime un element d'une BoatList
+void boatEater(BoatList **List, Boat* Boat); //Supprime un element d'une BoatList
 
-void VisualiserBoatList(BoatList *List); //Affiche les positions des differents bateaux contenus dans la BoatList
+void visualiserBoatList(BoatList *List); //Affiche les positions des differents bateaux contenus dans la BoatList
 
-Sens SensAleatoire(Sens A, Sens B); // Renvoie aléatoirement le Sens A ou B
+Sens sensAleatoire(Sens A, Sens B); // Renvoie aléatoirement le Sens A ou B
 
-void NewPositionBoat(Boat* Boat); //Met a jour la position du boat dans sa struct
+void setNewPositionBoat(Boat* Boat); //Met a jour la position du boat dans sa struct
 
-void NewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats); //Met a jour le Sens du boat en fonction du coefficient de la MatriceDecision sur lequel il se trouve
+void setNewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats); //Met a jour le Sens du boat en fonction du coefficient de la MatriceDecision sur lequel il se trouve
 
-void RoulementBoatsPosition(char** MatriceDecision, BoatList **List); // Met a jour toutes les positions des boat d'une BoatList
+void roulementBoatsPosition(char** MatriceDecision, BoatList **List); // Met a jour toutes les positions des boat d'une BoatList
 
-Coordonnees* PositionFutureBoat(Boat* Boat); //Renvoie un struct Coordonnees qui est la position future du Boat
+Coordonnees* positionFutureBoat(Boat* Boat); //Renvoie un struct Coordonnees qui est la position future du Boat

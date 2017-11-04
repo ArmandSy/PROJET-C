@@ -1,7 +1,7 @@
 #include "librairies.h"
 #include "decision.h"
 
-char** MatrixInit()
+char** matrixInit()
 {
 	int i;
 	char** Matrice = calloc(NBL, sizeof(char*));
@@ -12,7 +12,7 @@ char** MatrixInit()
 	return Matrice;
 }
 
-void TextToMatrix(char** Matrice, char* nomdufichiertexte)
+void textToMatrix(char** Matrice, char* nomdufichiertexte)
 {
 	int i;	
 	FILE* fichier = NULL;
@@ -28,7 +28,7 @@ void TextToMatrix(char** Matrice, char* nomdufichiertexte)
 
 
 
-void ShowMatrix(char** Matrice)
+void showMatrix(char** Matrice)
 {
 	int i;
 	for(i = 0; i < NBL; i++)
@@ -38,7 +38,7 @@ void ShowMatrix(char** Matrice)
 	printf("\nfin affichage\n");
 }
 	
-void RoulementFeuxDecision(char ** Matrice)
+void roulementFeuxDecision(char ** MatriceDecision)
 {
 	int i;
 	int j;
@@ -46,14 +46,18 @@ void RoulementFeuxDecision(char ** Matrice)
 	{
 		for(j=0; j < NBC; j++)
 			{
-				if(Matrice[i][j]=='o')
+				if(MatriceDecision[i][j]=='o')
 					{
-						Matrice[i][j]='f';
+						MatriceDecision[i][j]='f';
 					}
-				if(Matrice[i][j]=='f')
+				else if(MatriceDecision[i][j]=='f')
 					{
-						Matrice[i][j]='o';
+						MatriceDecision[i][j]='o';
 					}
+				else if(MatriceDecision[i][j]=='c')
+				{
+					//GERER LE CAS OU UNE VOITURE SERAIT SUR UN FEU A ACTUALISER => NE PAS FAIRE DISPARAITRE LA VOITURE
+				}
 			}
 	}
 }		
