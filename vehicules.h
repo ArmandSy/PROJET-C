@@ -18,12 +18,11 @@ typedef enum type type;
 
 enum Carburant	// Enumeration des differents etats du carburant pour un vehicule
 {
-	VIDE,
 	FAIBLE,
-	MOYEN,
 	PLEIN,
 };
 
+typedef enum Carburant Carburant;
 
 enum Direction // Enumeration des directions possibles pour une entité
 {
@@ -42,18 +41,16 @@ typedef struct Position
 			
 } Position;
 
-typedef enum Carburant Carburant;
-
 typedef struct Vehicule
 {
 	Direction Direction;
 	int posX;
 	int posY;
+	int Compteur;
 	int vitesse;
 	char custom[30];
 	char CaseDecision;
-	Carburant Carburant;
-			
+	Carburant Carburant;		
 } Vehicule;
 
 typedef struct VehiculeList // Liste chainee de vehicules pour la gestion du trafic
@@ -68,7 +65,7 @@ void vehiculeEater(VehiculeList **List, Vehicule* Vehicule); //Fonction ayant po
 
 void appendVehiculeList(VehiculeList **List, Vehicule* Vehicule); //Fonction permettant d'ajouter un Vehicule à la liste des Vehicules (à appeler après le Spawner)
 
-void vehiculeSpawner(int posX, int posY, Direction Direction, char** MatriceDecision, VehiculeList** ListeDesVehicules); //renvoie un pointeur de vehicule ayant pour position (x,y) et pour Direction Direction
+void vehiculeSpawner(int posX, int posY, Direction Direction, Carburant Carburant, char** MatriceDecision, VehiculeList** ListeDesVehicules); //renvoie un pointeur de vehicule ayant pour position (x,y) et pour Direction Direction
 
 void visualiserVehiculeList(VehiculeList *List); //permet de visualiser une liste de vehicules (affiche les positions de ces vehicules)
 

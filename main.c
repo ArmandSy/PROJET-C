@@ -99,7 +99,7 @@ OK
 
 //TESTS RELATIFS AUX VEHICULES ET A LEURS MOUVEMENTS
 
-/*
+
 
 srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
 
@@ -111,17 +111,25 @@ showMatrix(MatriceDecision);
 
 VehiculeList* ListeDesVehicules = NULL;
 
-vehiculeSpawner(20, 193, OUEST, MatriceDecision, &ListeDesVehicules);
+//(20,193) est une Position de Spawner de Vehicule
 
+vehiculeSpawner(28, 152, EST, FAIBLE, MatriceDecision, &ListeDesVehicules);
+
+int k=0;
+
+for(k=0; k<20; k++)
+{
 roulementVehiculesPosition(MatriceDecision, &ListeDesVehicules);
+}
 
 showMatrix(MatriceDecision);
 
-OK FONCTIONNE ! Meme les virages (:
+//OK FONCTIONNE ! Meme les virages (:
 
-*/
 
 //TESTS RELATIFS AUX BATEAUX ET A LEURS MOUVEMENTS
+
+/*
 
 srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
 
@@ -134,6 +142,8 @@ showMatrix(MatriceDecision);
 BoatList* ListeDesBoats = NULL;
 
 boatSpawner(22, 1, DROITE, MatriceDecision, &ListeDesBoats);
+
+*/
 
 /*
 roulementBoatsPosition(MatriceDecision, &ListeDesBoats);

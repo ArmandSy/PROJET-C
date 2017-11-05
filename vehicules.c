@@ -60,6 +60,17 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesV
 			Position* NextPosition = positionFuture(tmp->Vehicule); // Afin de free plus tard
 			if(Obstacle(MatriceDecision, NextPosition->posX, NextPosition->posY)==0)
 			{
+				if((MatriceDecision[NextPosition->posX][NextPosition->posY]=='P')&&((tmp->Vehicule->Compteur)<8))
+				{
+					//PRINTF LA VOITURE A LA MEME POSITION
+					//ANIMATION DE REMPLISSAGE DU PLEIN?
+					tmp->Vehicule->Compteur = tmp->Vehicule->Compteur +1;
+					free(NextPosition);
+					break;
+				}
+
+				else
+				{
 				MatriceDecision[tmp->Vehicule->posX][tmp->Vehicule->posY] = tmp->Vehicule->CaseDecision; //La ou la voiture etait devient de la route (place libre)
 				setNewPositionVehicule(tmp->Vehicule); //On actualise la position de la voiture dans la structure 
 				tmp->Vehicule->CaseDecision = MatriceDecision[NextPosition->posX][NextPosition->posY]; // MAJ de la case decision
@@ -67,6 +78,7 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesV
 				MatriceDecision[NextPosition->posX][NextPosition->posY] = 'c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
 				//ON PEUT PRINTF LA VOITURE ICI EN SOIT
 				tmp = tmp->next;
+				}
 			}
 			else 
 			{
@@ -105,13 +117,15 @@ void appendVehiculeList(VehiculeList** ListeDesVehicules, Vehicule* Vehicule)
 	*ListeDesVehicules = element;
 }
 
-void vehiculeSpawner(int posX, int posY, Direction Direction, char** MatriceDecision, VehiculeList** ListeDesVehicules)
+void vehiculeSpawner(int posX, int posY, Direction Direction, Carburant Carburant, char** MatriceDecision, VehiculeList** ListeDesVehicules)
 {
 	Vehicule* Veh = malloc(sizeof(Vehicule));
 	Veh->posX=posX;
 	Veh->posY=posY;
+	Veh->Compteur = 0;
 	Veh->CaseDecision = 'S';
 	Veh->Direction = Direction;
+	Veh->Carburant = Carburant;
 	MatriceDecision[posX][posY] = 'c';
 	appendVehiculeList(ListeDesVehicules, Veh);
 }
@@ -161,6 +175,12 @@ void setNewVehiculeDirection(Vehicule* Vehicule, char ** MatriceDecision, Vehicu
 		Vehicule->Direction = directionAleatoire(EST,SUD); break;
 	case 'E':
 		vehiculeEater(&ListeDesVehicules,Vehicule);
+	case 'a':
+		if(Vehicule->Carburant == FAIBLE)
+		{
+			Vehicule->Direction = SUD;
+		}
+		// FAIRE UNE ANIMATION?
 	}
 }
 
