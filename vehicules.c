@@ -65,8 +65,6 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesV
 					//PRINTF LA VOITURE A LA MEME POSITION
 					//ANIMATION DE REMPLISSAGE DU PLEIN?
 					tmp->Vehicule->Compteur = tmp->Vehicule->Compteur +1;
-					free(NextPosition);
-					break;
 				}
 
 				else
@@ -77,14 +75,14 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesV
 				setNewVehiculeDirection(tmp->Vehicule, MatriceDecision, *ListeDesVehicules); //On actualise la Direction du vehicule
 				MatriceDecision[NextPosition->posX][NextPosition->posY] = 'c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
 				//ON PEUT PRINTF LA VOITURE ICI EN SOIT
-				tmp = tmp->next;
 				}
 			}
 			else 
 			{
 				//PRINTF LA VOITURE A SA MEME POSITION
-				tmp = tmp->next;
+				
 			}
+			tmp = tmp->next;
 			free(NextPosition);
 		}
 }

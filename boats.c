@@ -3,24 +3,24 @@
 
 // FONCTIONS RELATIVES AUX BATEAUX ET A LEURS DECISIONS
 
-void boatSpawner(int posX, int posY, Sens Sens, char** MatriceDecision, BoatList** ListeDesBoats)
-{
-	Boat* Boat = malloc(sizeof(Boat));
-	Boat->posX = posX;
-	Boat->posY = posY;
-	Boat->Sens = Sens;
-	Boat->CaseDecision = 'S';
-	MatriceDecision[posX][posY] = 'L';
-	appendBoatList(ListeDesBoats, Boat);
-}
-
-void appendBoatList(BoatList **ListeDesBoats,Boat* Boat)
+void appendBoatList(BoatList** ListeDesBoats, Boat* Boat)
 {
 	BoatList *element;
 	element = calloc(1,sizeof(*element));
 	element->Boat = Boat;
 	element->next = *ListeDesBoats;
 	*ListeDesBoats = element;
+}
+
+void boatSpawner(int posX, int posY, Sens Sens, char** MatriceDecision, BoatList** ListeDesBoats)
+{
+	Boat* Bateau = calloc(1,sizeof(Boat));
+	Bateau->posX = posX;
+	Bateau->posY = posY;
+	Bateau->Sens = Sens;
+	Bateau->CaseDecision = 'S';
+	MatriceDecision[posX][posY] = 'L';
+	appendBoatList(ListeDesBoats, Bateau);
 }
 
 void boatEater(BoatList **List, Boat* Boat)
@@ -93,7 +93,7 @@ void setNewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats
 
 Coordonnees* positionFutureBoat(Boat* Boat)
 {
-	Coordonnees* Coordonnees = NULL;
+	Coordonnees* Coordonnees = malloc(sizeof(Coordonnees));
 	switch(Boat->Sens) 
 	{
 		case HAUT: 
@@ -129,20 +129,44 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 		Coordonnees* NextCoordonnees = positionFutureBoat(tmp->Boat); //astuce pour bien gerer la memoire et free apres
 		if(MatriceDecision[NextCoordonnees->posX][NextCoordonnees->posY]!='L')
 		{
+			if(tmp->Boat->CaseDecision == 'D') // S'il passe sous un pont
+			{
+					MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = tmp->Boat->CaseDecision; //On remet le D à sa place
+					setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
+					tmp->Boat->CaseDecision = 'F'; // Mode fantome, le bateau est sous le pont
+			}
+			else if(tmp->Boat->CaseDecision == 'E') // Si la case ou il se trouve est un Eater (fin de map)
+			{
+					boatEater(ListeDesBoats, tmp->Boat);
+			}
+			else if(tmp->Boat->CaseDecision == 'F') //Mode fantome, le bateau est sous le pont
+			{
+					if(MatriceDecision[NextCoordonnees->posX][NextCoordonnees->posY]=='A')
+					{
+						setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
+						tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
+						MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'L'; // Mise a jour de la MatriceDecison
+						//ON PEUT PRINTF LE BATEAU ICI EN SOIT
+					}
+					else{
+					setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
+						}
+			}
+			else
+			{
 			MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = tmp->Boat->CaseDecision; //La case ou se trouvait le bateau redevient de l'eau
 			setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
 			tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
 			setNewBoatSens(tmp->Boat, MatriceDecision, *ListeDesBoats); //Mise a jour de la Direction du Bateau en fonction de la ou il se situe sur la MatriceDecison
 			MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'L'; // Mise a jour de la MatriceDecison
 			//ON PEUT PRINTF LE BATEAU ICI EN SOIT
-			tmp = tmp->next;
+			}
 		}
 		else
 		{
-			//ON PRINTF LE BATEAU AU MEME ENDROIT
-			tmp = tmp->next;
+			//Printf le bateau a la meme position
 		}
+		tmp = tmp->next;
 		free(NextCoordonnees);
 	}
 }
-

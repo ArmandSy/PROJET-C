@@ -100,7 +100,7 @@ OK
 //TESTS RELATIFS AUX VEHICULES ET A LEURS MOUVEMENTS
 
 
-
+/*
 srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
 
 char ** MatriceDecision = matrixInit(NBC, NBL);
@@ -124,13 +124,15 @@ roulementVehiculesPosition(MatriceDecision, &ListeDesVehicules);
 
 showMatrix(MatriceDecision);
 
+*/
+
 //OK FONCTIONNE ! Meme les virages (:
 
 
 //TESTS RELATIFS AUX BATEAUX ET A LEURS MOUVEMENTS
 
-/*
 
+/*
 srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
 
 char ** MatriceDecision = matrixInit(NBC, NBL);
@@ -143,13 +145,17 @@ BoatList* ListeDesBoats = NULL;
 
 boatSpawner(22, 1, DROITE, MatriceDecision, &ListeDesBoats);
 
-*/
-
-/*
+int i=0;
+for(i=0; i<212; i++){
 roulementBoatsPosition(MatriceDecision, &ListeDesBoats);
-
+}
 showMatrix(MatriceDecision);
+
+//ça marche ! les D et A representent "Disparaitre" et "Apparaitre", Les Eaters en fin de map font segfault, reste à trouver pourquoi
+
 */
+
+
 
 	return 0;
 }
