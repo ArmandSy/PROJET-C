@@ -85,7 +85,7 @@ void setNewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats
 	case 'g':
 		Boat->Sens = GAUCHE; break;
 	case 'x':
-		Boat->Sens = sensAleatoire(GAUCHE,HAUT); break;
+		Boat->Sens = sensAleatoire(DROITE,HAUT); break;
 	case 'y':
 		Boat->Sens = sensAleatoire(DROITE,BAS); break;
 	case 'E':
@@ -166,7 +166,7 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 		}
 		else
 		{
-			//Printf le bateau a la meme position
+			affichageBoat(tmp->Boat);
 		}
 		tmp = tmp->next;
 		free(NextCoordonnees);
@@ -175,20 +175,29 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 
 void affichageBoat(Boat* B){
 	switch(B->custom){
-		case 'v': couleur("42");
-			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+		case 'v': 
+		couleur("30");
+		couleur("46");
+			printf("\033[%d;%dH⛵",B->posX,B->posY);
 			couleur("0");
-		case 'o': couleur("43");
-			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+			break;
+		case 'o': 
+		couleur("30");
+		couleur("46");
+			printf("\033[%d;%dH🛥",B->posX,B->posY);
 			couleur("0");
-		case 'r': couleur("41");
-			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+			break;
+		case 'r': 
+		couleur("30");
+		couleur("46");
+			printf("\033[%d;%dH🍩",B->posX,B->posY);
 			couleur("0");
-		case 'b': couleur("45");
-			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+			break;
+		case 'b': 
+		couleur("30");
+		couleur("46");
+			printf("\033[%d;%dH⛴",B->posX,B->posY);
 			couleur("0");
-		case 's': couleur("47");
-			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
-			couleur("0");
+			break;
 	}
 }

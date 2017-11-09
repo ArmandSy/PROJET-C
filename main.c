@@ -157,6 +157,8 @@ showMatrix(MatriceDecision);
 
 //affichageMap();
 
+affichageMap();
+
 srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
 
 char ** MatriceDecision = matrixInit(NBC, NBL);
@@ -165,9 +167,16 @@ textToMatrix(MatriceDecision, "dec.txt");
 
 BoatList* ListeDesBoats = NULL; 
 
-boatSpawner(22, 1, DROITE, 'v', MatriceDecision, &ListeDesBoats);
+boatSpawner(26, 1, DROITE, 'v', MatriceDecision, &ListeDesBoats);
 
+int i = 0;
+
+for(i=0; i<210; i++)
+{
 roulementBoatsPosition(MatriceDecision, &ListeDesBoats);
+affichageMap();
+}
+
 
 	return 0;
 }
