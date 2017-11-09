@@ -1,9 +1,9 @@
 #include "librairies.h"
-#include "affichage.h"
 #include "boats.h"
 #include "trafficlights.h"
 #include "vehicules.h"
 #include "decision.h"
+#include "affichage.h"
 
 int main()
 {
@@ -155,7 +155,19 @@ showMatrix(MatriceDecision);
 
 */
 
+//affichageMap();
 
+srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
+
+char ** MatriceDecision = matrixInit(NBC, NBL);
+
+textToMatrix(MatriceDecision, "dec.txt");
+
+BoatList* ListeDesBoats = NULL; 
+
+boatSpawner(22, 1, DROITE, 'v', MatriceDecision, &ListeDesBoats);
+
+roulementBoatsPosition(MatriceDecision, &ListeDesBoats);
 
 	return 0;
 }

@@ -1,6 +1,7 @@
 #include "librairies.h"
 #include "boats.h"
 
+
 // FONCTIONS RELATIVES AUX BATEAUX ET A LEURS DECISIONS
 
 void appendBoatList(BoatList** ListeDesBoats, Boat* Boat)
@@ -12,12 +13,13 @@ void appendBoatList(BoatList** ListeDesBoats, Boat* Boat)
 	*ListeDesBoats = element;
 }
 
-void boatSpawner(int posX, int posY, Sens Sens, char** MatriceDecision, BoatList** ListeDesBoats)
+void boatSpawner(int posX, int posY, Sens Sens, char a, char** MatriceDecision, BoatList** ListeDesBoats)
 {
 	Boat* Bateau = calloc(1,sizeof(Boat));
 	Bateau->posX = posX;
 	Bateau->posY = posY;
 	Bateau->Sens = Sens;
+	Bateau->custom = a;
 	Bateau->CaseDecision = 'S';
 	MatriceDecision[posX][posY] = 'L';
 	appendBoatList(ListeDesBoats, Bateau);
@@ -146,7 +148,7 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 						setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
 						tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
 						MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'L'; // Mise a jour de la MatriceDecison
-						//ON PEUT PRINTF LE BATEAU ICI EN SOIT
+						affichageBoat(tmp->Boat);
 					}
 					else{
 					setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
@@ -159,7 +161,7 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 			tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
 			setNewBoatSens(tmp->Boat, MatriceDecision, *ListeDesBoats); //Mise a jour de la Direction du Bateau en fonction de la ou il se situe sur la MatriceDecison
 			MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'L'; // Mise a jour de la MatriceDecison
-			//ON PEUT PRINTF LE BATEAU ICI EN SOIT
+			affichageBoat(tmp->Boat);
 			}
 		}
 		else
@@ -168,5 +170,25 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 		}
 		tmp = tmp->next;
 		free(NextCoordonnees);
+	}
+}
+
+void affichageBoat(Boat* B){
+	switch(B->custom){
+		case 'v': couleur("42");
+			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+			couleur("0");
+		case 'o': couleur("43");
+			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+			couleur("0");
+		case 'r': couleur("41");
+			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+			couleur("0");
+		case 'b': couleur("45");
+			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+			couleur("0");
+		case 's': couleur("47");
+			printf("\033[%d;%dH%c",B->posY,B->posX,B->custom);
+			couleur("0");
 	}
 }

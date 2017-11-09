@@ -1,5 +1,7 @@
 #include "librairies.h"
 
+#define boats
+
 
 enum Sens // Enumeration des directions possibles pour un vehicule
 {
@@ -26,7 +28,7 @@ typedef enum Modele Modele;
 typedef struct Boat{
 	int posX;
 	int posY;
-	char custom[30];
+	char custom;
 	Sens Sens;	
 	char CaseDecision;
 	}Boat;
@@ -44,7 +46,7 @@ typedef struct BoatList // Liste chainee des Bateaux
 	struct BoatList *next;
 } BoatList;
 
-void boatSpawner(int posX, int posY, Sens Sens, char** MatriceDecision, BoatList** ListeDesBoats); //Fonction initialisant un Bateau allant dans la Direction Direction a la position (posX,posY)
+void boatSpawner(int posX, int posY, Sens Sens, char a, char** MatriceDecision, BoatList** ListeDesBoats); //Fonction initialisant un Bateau allant dans la Direction Direction a la position (posX,posY)
 
 void appendBoatList(BoatList **List,Boat* Boat); //Fonction ajoutant un Boat a une BoatList
 
@@ -61,3 +63,5 @@ void setNewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats
 void roulementBoatsPosition(char** MatriceDecision, BoatList **List); // Met a jour toutes les positions des boat d'une BoatList
 
 Coordonnees* positionFutureBoat(Boat* Boat); //Renvoie un struct Coordonnees qui est la position future du Boat
+
+void affichageBoat(Boat* B); //Fonction d'affichage de bateau

@@ -2,6 +2,7 @@
 #define FEU_EST_ROUGE 'f'
 #define CAR_IS_HERE 'c'
 
+#define vehicules
 
 enum type	// Enumeration des differents types de vehicules
 {
@@ -41,14 +42,16 @@ typedef struct Position
 			
 } Position;
 
-typedef struct Vehicule
+#define VEHICULES
+
+	typedef struct Vehicule
 {
 	Direction Direction;
 	int posX;
 	int posY;
 	int Compteur;
 	int vitesse;
-	char custom[30];
+	char custom;
 	char CaseDecision;
 	Carburant Carburant;		
 } Vehicule;
@@ -59,13 +62,14 @@ typedef struct VehiculeList // Liste chainee de vehicules pour la gestion du tra
 	struct VehiculeList *next;
 } VehiculeList;
 
+
 Position* positionFuture(Vehicule* vehicule); //Fonction renvoyant un struct Position (qui sera la position de vehicule à la frame suivante) en fonction de sa Direction
 
 void vehiculeEater(VehiculeList **List, Vehicule* Vehicule); //Fonction ayant pour but de supprimer de la liste VehiculeList les Vehicules sortant de la map. L'appeler lorsque PositionFuture(Vehicule) renvoit une position dont au moins une coordonnée est hors de la map
 
 void appendVehiculeList(VehiculeList **List, Vehicule* Vehicule); //Fonction permettant d'ajouter un Vehicule à la liste des Vehicules (à appeler après le Spawner)
 
-void vehiculeSpawner(int posX, int posY, Direction Direction, Carburant Carburant, char** MatriceDecision, VehiculeList** ListeDesVehicules); //renvoie un pointeur de vehicule ayant pour position (x,y) et pour Direction Direction
+void vehiculeSpawner(int posX, int posY, Direction Direction, Carburant Carburant, char a, char** MatriceDecision, VehiculeList** ListeDesVehicules); // Spawner de Vehicules
 
 void visualiserVehiculeList(VehiculeList *List); //permet de visualiser une liste de vehicules (affiche les positions de ces vehicules)
 
@@ -82,3 +86,5 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** List); //
 Vehicule* oldVehiculeSpawner(int posX, int posY, Direction Direction); // Ancienne fonction pour tester un truc
 
 int Obstacle(char** MatriceDecision, int i, int j);
+
+void affichageVehicule(Vehicule* V); //Fonction d'affichage de Vehicule

@@ -62,7 +62,7 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesV
 			{
 				if((MatriceDecision[NextPosition->posX][NextPosition->posY]=='P')&&((tmp->Vehicule->Compteur)<8))
 				{
-					//PRINTF LA VOITURE A LA MEME POSITION
+					//affichageVoiture(tmp->Vehicule);
 					//ANIMATION DE REMPLISSAGE DU PLEIN?
 					tmp->Vehicule->Compteur = tmp->Vehicule->Compteur +1;
 				}
@@ -74,12 +74,12 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesV
 				tmp->Vehicule->CaseDecision = MatriceDecision[NextPosition->posX][NextPosition->posY]; // MAJ de la case decision
 				setNewVehiculeDirection(tmp->Vehicule, MatriceDecision, *ListeDesVehicules); //On actualise la Direction du vehicule
 				MatriceDecision[NextPosition->posX][NextPosition->posY] = 'c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
-				//ON PEUT PRINTF LA VOITURE ICI EN SOIT
+				//affichageVoiture(tmp->Vehicule);
 				}
 			}
 			else 
 			{
-				//PRINTF LA VOITURE A SA MEME POSITION
+				//affichageVoiture(tmp->Vehicule);
 				
 			}
 			tmp = tmp->next;
@@ -115,12 +115,13 @@ void appendVehiculeList(VehiculeList** ListeDesVehicules, Vehicule* Vehicule)
 	*ListeDesVehicules = element;
 }
 
-void vehiculeSpawner(int posX, int posY, Direction Direction, Carburant Carburant, char** MatriceDecision, VehiculeList** ListeDesVehicules)
+void vehiculeSpawner(int posX, int posY, Direction Direction, Carburant Carburant, char a, char** MatriceDecision, VehiculeList** ListeDesVehicules)
 {
 	Vehicule* Veh = malloc(sizeof(Vehicule));
 	Veh->posX=posX;
 	Veh->posY=posY;
 	Veh->Compteur = 0;
+	Veh->custom = a;
 	Veh->CaseDecision = 'S';
 	Veh->Direction = Direction;
 	Veh->Carburant = Carburant;
@@ -198,5 +199,26 @@ Direction directionAleatoire(Direction A, Direction B)
 void placeTerminale(int posX, int posY)
 {
 	printf("\33[%d;%dH",posX,posY);
+}
+
+void affichageVehicule(Vehicule* V){
+	switch(V->custom){
+		case 'v': couleur("42");
+			printf("\033[%d;%dH%c",V->posY,V->posX,V->custom);
+			couleur("0");
+		case 'o': couleur("43");
+			printf("\033[%d;%dH%c",V->posY,V->posX,V->custom);
+			couleur("0");
+		case 'r': couleur("41");
+			printf("\033[%d;%dH%c",V->posY,V->posX,V->custom);
+			couleur("0");
+		case 'b': couleur("45");
+			printf("\033[%d;%dH%c",V->posY,V->posX,V->custom);
+			couleur("0");
+		case 's': couleur("47");
+			printf("\033[%d;%dH%c",V->posY,V->posX,V->custom);
+			couleur("0");
+	}
+	
 }
 
