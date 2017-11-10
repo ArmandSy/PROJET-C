@@ -25,21 +25,28 @@ void boatSpawner(int posX, int posY, Sens Sens, char a, char** MatriceDecision, 
 	appendBoatList(ListeDesBoats, Bateau);
 }
 
-void boatEater(BoatList **List, Boat* Boat)
+BoatList* boatEater(BoatList **List, Boat* Boat)
 {
 	BoatList* PointeurCourant;
 	BoatList* PointeurPrecedent;
 	PointeurPrecedent = NULL; //pas de pointeur precedent pour le 1er element de la liste
-	for(PointeurCourant = *List; PointeurCourant != NULL; PointeurPrecedent = PointeurCourant, PointeurCourant = PointeurCourant->next){
-			if (PointeurCourant->Boat == Boat){
-				if (PointeurPrecedent == NULL){ 	/*cas ou on voudrait en fait supprimer le 1er element de la liste (Particulier)	*/
-					*List = PointeurCourant->next;} /*on dit juste que le 1er element est en fait le 2e, et on free plus bas */
-				else{
-					PointeurPrecedent->next = PointeurCourant->next; // on skip l'element a supprimer									
-									}
-			free(PointeurCourant);break;
-								}
-						}
+	for (PointeurCourant = *List; PointeurCourant != NULL; PointeurPrecedent = PointeurCourant, PointeurCourant = PointeurCourant->next)
+	{
+			if (PointeurCourant->Boat == Boat)
+			{
+				if (PointeurPrecedent == NULL)
+					{ 	/*cas ou on voudrait en fait supprimer le 1er element de la liste (Particulier)	*/
+						*List = PointeurCourant->next;
+					} /*on dit juste que le 1er element est en fait le 2e, et on free plus bas */
+				else 
+					{
+						PointeurPrecedent->next = PointeurCourant->next; // on skip l'element a supprimer									
+					}
+					BoatList* ptrToReturn = PointeurCourant->next;
+					free (PointeurCourant);break;
+					return ptrToReturn;
+			}
+	}
 }
 
 void visualiserBoatList(BoatList *List)
@@ -89,7 +96,7 @@ void setNewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats
 	case 'y':
 		Boat->Sens = sensAleatoire(DROITE,BAS); break;
 	case 'E':
-		boatEater(&ListeDesBoats,Boat);
+		break;
 	}
 }
 
@@ -129,17 +136,19 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 	while (tmp !=NULL)
 	{
 		Coordonnees* NextCoordonnees = positionFutureBoat(tmp->Boat); //astuce pour bien gerer la memoire et free apres
-		if(MatriceDecision[NextCoordonnees->posX][NextCoordonnees->posY]!='L')
+		if(MatriceDecision[NextCoordonnees->posX][NextCoordonnees->posY]=='L')
+		{
+			affichageBoat(tmp->Boat);
+			tmp = tmp->next;
+		}
+		else
 		{
 			if(tmp->Boat->CaseDecision == 'D') // S'il passe sous un pont
 			{
 					MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = tmp->Boat->CaseDecision; //On remet le D à sa place
 					setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
 					tmp->Boat->CaseDecision = 'F'; // Mode fantome, le bateau est sous le pont
-			}
-			else if(tmp->Boat->CaseDecision == 'E') // Si la case ou il se trouve est un Eater (fin de map)
-			{
-					boatEater(ListeDesBoats, tmp->Boat);
+					tmp = tmp->next;
 			}
 			else if(tmp->Boat->CaseDecision == 'F') //Mode fantome, le bateau est sous le pont
 			{
@@ -149,9 +158,11 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 						tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
 						MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'L'; // Mise a jour de la MatriceDecison
 						affichageBoat(tmp->Boat);
+						tmp = tmp->next;
 					}
 					else{
 					setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
+					tmp = tmp->next;
 						}
 			}
 			else
@@ -162,13 +173,16 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 			setNewBoatSens(tmp->Boat, MatriceDecision, *ListeDesBoats); //Mise a jour de la Direction du Bateau en fonction de la ou il se situe sur la MatriceDecison
 			MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'L'; // Mise a jour de la MatriceDecison
 			affichageBoat(tmp->Boat);
+				if (tmp->Boat->CaseDecision == 'E')
+				{
+					tmp = boatEater(ListeDesBoats, tmp->Boat);
+				}
+				else
+				{
+					tmp = tmp->next;	
+				}
 			}
 		}
-		else
-		{
-			affichageBoat(tmp->Boat);
-		}
-		tmp = tmp->next;
 		free(NextCoordonnees);
 	}
 }
@@ -199,5 +213,13 @@ void affichageBoat(Boat* B){
 			printf("\033[%d;%dH⛴",B->posX,B->posY);
 			couleur("0");
 			break;
+	}
+}
+
+void EaterOrNot(Boat* Boat, BoatList** ListeDesBoats)
+{
+	if (Boat->CaseDecision == 'E')
+	{
+		boatEater(ListeDesBoats, Boat);
 	}
 }

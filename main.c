@@ -167,11 +167,13 @@ textToMatrix(MatriceDecision, "dec.txt");
 
 BoatList* ListeDesBoats = NULL; 
 
+boatSpawner(22, 1, DROITE, 'v', MatriceDecision, &ListeDesBoats);
+
 boatSpawner(26, 1, DROITE, 'v', MatriceDecision, &ListeDesBoats);
 
 int i = 0;
 
-for(i=0; i<210; i++)
+for(i=0; i<240; i++)
 {
 roulementBoatsPosition(MatriceDecision, &ListeDesBoats);
 affichageMap();

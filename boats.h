@@ -50,7 +50,7 @@ void boatSpawner(int posX, int posY, Sens Sens, char a, char** MatriceDecision, 
 
 void appendBoatList(BoatList **List,Boat* Boat); //Fonction ajoutant un Boat a une BoatList
 
-void boatEater(BoatList **List, Boat* Boat); //Supprime un element d'une BoatList
+BoatList* boatEater(BoatList **List, Boat* Boat); //Supprime un element d'une BoatList
 
 void visualiserBoatList(BoatList *List); //Affiche les positions des differents bateaux contenus dans la BoatList
 
@@ -65,3 +65,5 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList **List); // Met a j
 Coordonnees* positionFutureBoat(Boat* Boat); //Renvoie un struct Coordonnees qui est la position future du Boat
 
 void affichageBoat(Boat* B); //Fonction d'affichage de bateau
+
+void EaterOrNot(Boat* Boat, BoatList** ListeDesBoats); //Fonction testant si oui ou non le bateau est en fin de map
