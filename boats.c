@@ -47,6 +47,7 @@ BoatList* boatEater(BoatList **List, Boat* Boat)
 					return ptrToReturn;
 			}
 	}
+return NULL;
 }
 
 void visualiserBoatList(BoatList *List)
@@ -221,5 +222,20 @@ void EaterOrNot(Boat* Boat, BoatList** ListeDesBoats)
 	if (Boat->CaseDecision == 'E')
 	{
 		boatEater(ListeDesBoats, Boat);
+	}
+}
+
+char AleatoireCustomBoat()
+{
+	switch(rand()%4)
+	{
+		case 0: 
+		return'v'; break;
+		case 1: 
+		return 'r'; break;
+		case 2:
+		return 'o'; break;
+		default:
+		return 'b'; break;
 	}
 }

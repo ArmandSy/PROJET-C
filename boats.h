@@ -67,3 +67,5 @@ Coordonnees* positionFutureBoat(Boat* Boat); //Renvoie un struct Coordonnees qui
 void affichageBoat(Boat* B); //Fonction d'affichage de bateau
 
 void EaterOrNot(Boat* Boat, BoatList** ListeDesBoats); //Fonction testant si oui ou non le bateau est en fin de map
+
+char AleatoireCustomBoat(); //Renvoie aleatoirement un skin de bateau

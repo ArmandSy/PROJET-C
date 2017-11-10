@@ -65,7 +65,7 @@ typedef struct VehiculeList // Liste chainee de vehicules pour la gestion du tra
 
 Position* positionFuture(Vehicule* vehicule); //Fonction renvoyant un struct Position (qui sera la position de vehicule à la frame suivante) en fonction de sa Direction
 
-void vehiculeEater(VehiculeList **List, Vehicule* Vehicule); //Fonction ayant pour but de supprimer de la liste VehiculeList les Vehicules sortant de la map. L'appeler lorsque PositionFuture(Vehicule) renvoit une position dont au moins une coordonnée est hors de la map
+VehiculeList* vehiculeEater(VehiculeList **List, Vehicule* Vehicule); //Fonction ayant pour but de supprimer de la liste VehiculeList les Vehicules sortant de la map. L'appeler lorsque PositionFuture(Vehicule) renvoit une position dont au moins une coordonnée est hors de la map
 
 void appendVehiculeList(VehiculeList **List, Vehicule* Vehicule); //Fonction permettant d'ajouter un Vehicule à la liste des Vehicules (à appeler après le Spawner)
 
@@ -88,3 +88,5 @@ Vehicule* oldVehiculeSpawner(int posX, int posY, Direction Direction); // Ancien
 int Obstacle(char** MatriceDecision, int i, int j);
 
 void affichageVehicule(Vehicule* V); //Fonction d'affichage de Vehicule
+
+char AleatoireCustomVehicule();
