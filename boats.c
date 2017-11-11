@@ -168,6 +168,7 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 			}
 			else
 			{
+
 			MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = tmp->Boat->CaseDecision; //La case ou se trouvait le bateau redevient de l'eau
 			setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
 			tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
@@ -193,25 +194,25 @@ void affichageBoat(Boat* B){
 		case 'v': 
 		couleur("30");
 		couleur("46");
-			printf("\033[%d;%dH⛵",B->posX,B->posY);
+			printf("\033[%d;%dH⛵\n",B->posX,B->posY);
 			couleur("0");
 			break;
 		case 'o': 
 		couleur("30");
 		couleur("46");
-			printf("\033[%d;%dH🛥",B->posX,B->posY);
+			printf("\033[%d;%dH🛥\n",B->posX,B->posY);
 			couleur("0");
 			break;
 		case 'r': 
 		couleur("30");
 		couleur("46");
-			printf("\033[%d;%dH🍩",B->posX,B->posY);
+			printf("\033[%d;%dH🍩\n",B->posX,B->posY);
 			couleur("0");
 			break;
 		case 'b': 
 		couleur("30");
 		couleur("46");
-			printf("\033[%d;%dH⛴",B->posX,B->posY);
+			printf("\033[%d;%dH⛴\n",B->posX,B->posY);
 			couleur("0");
 			break;
 	}
@@ -230,7 +231,7 @@ char AleatoireCustomBoat()
 	switch(rand()%4)
 	{
 		case 0: 
-		return'v'; break;
+		return 'v'; break;
 		case 1: 
 		return 'r'; break;
 		case 2:

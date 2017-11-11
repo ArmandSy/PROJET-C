@@ -171,18 +171,40 @@ BoatList* ListeDesBoats = NULL;
 
 VehiculeList* ListeDesVehicules = NULL;
 
+HelicoptereList* ListeDesHelicopteres = NULL;
+
+TramwayList* ListeDesTramways = NULL;
+
 boatSpawner(22, 1, DROITE, AleatoireCustomBoat(), MatriceDecision, &ListeDesBoats);
 
 boatSpawner(26, 1, DROITE, AleatoireCustomBoat(), MatriceDecision, &ListeDesBoats);
 
 vehiculeSpawner(22, 194, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
 
+helicoptereSpawner(3, 3, 'c', &ListeDesHelicopteres);
+
+
+
+tramwaySpawner(56, 1, EST, &ListeDesTramways);
+//tramwaySpawner(65, 114, NORD, &ListeDesTramways); Autre Spawner 
+
+int j = 0;
 int i = 0;
 
 for(i=0; i<240; i++)
 {
 roulementBoatsPosition(MatriceDecision, &ListeDesBoats);
 roulementVehiculesPosition(MatriceDecision, &ListeDesVehicules);
+roulementHelicopteresPosition(MatriceDecision, &ListeDesHelicopteres);
+roulementTramwaysPosition(MatriceDecision, &ListeDesTramways);
+
+if(j<4)
+{
+	j++;
+	tramwaySpawner(56, 1, EST, &ListeDesTramways);
+	//tramwaySpawner(65, 114, NORD, &ListeDesTramways);
+}
+
 affichageMap();
 }
 
