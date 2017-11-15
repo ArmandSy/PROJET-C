@@ -4,6 +4,9 @@
 #include "vehicules.h"
 #include "decision.h"
 #include "affichage.h"
+#include "pietons.h"
+#include "tramways.h"
+#include "helicopteres.h"
 
 int main()
 {
@@ -159,6 +162,28 @@ showMatrix(MatriceDecision);
 
 printf("\e[?25l");
 
+system("cat Accueil.txt");
+
+int k;
+int z;
+for(k = 0; k< 100 ; k++)
+	{
+		for(z = 0; z<6000000; z++)
+		{
+			if (z%60000 == 0)
+			{
+					printf("\r Loading ... %d/100",k);
+			}
+		}
+	}
+
+/*
+system("xdotool key CTRL+underscore");
+system("xdotool key CTRL+underscore");
+system("xdotool key CTRL+underscore");
+*/
+
+
 affichageMap();
 
 srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directionAleatoire renvoit toujours la meme Direction
@@ -175,6 +200,8 @@ HelicoptereList* ListeDesHelicopteres = NULL;
 
 TramwayList* ListeDesTramways = NULL;
 
+PietonList* ListeDesPietons = NULL;
+
 boatSpawner(22, 1, DROITE, AleatoireCustomBoat(), MatriceDecision, &ListeDesBoats);
 
 boatSpawner(26, 1, DROITE, AleatoireCustomBoat(), MatriceDecision, &ListeDesBoats);
@@ -183,10 +210,10 @@ vehiculeSpawner(22, 194, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecisi
 
 helicoptereSpawner(3, 3, 'c', &ListeDesHelicopteres);
 
+//pietonSpawner(x, y, &ListeDesPietons);
 
-
+tramwaySpawner(65, 114, NORD, &ListeDesTramways); 
 tramwaySpawner(56, 1, EST, &ListeDesTramways);
-//tramwaySpawner(65, 114, NORD, &ListeDesTramways); Autre Spawner 
 
 int j = 0;
 int i = 0;
@@ -198,11 +225,17 @@ roulementVehiculesPosition(MatriceDecision, &ListeDesVehicules);
 roulementHelicopteresPosition(MatriceDecision, &ListeDesHelicopteres);
 roulementTramwaysPosition(MatriceDecision, &ListeDesTramways);
 
+if(i==140)
+{
+	roulementFeuxDecision(MatriceDecision); //ça marche mais peut etre doit on reculer les feux?
+
+}
+
 if(j<4)
 {
 	j++;
+	tramwaySpawner(65, 114, NORD, &ListeDesTramways);
 	tramwaySpawner(56, 1, EST, &ListeDesTramways);
-	//tramwaySpawner(65, 114, NORD, &ListeDesTramways);
 }
 
 affichageMap();
