@@ -60,7 +60,7 @@ void setNewPositionBoat(Boat* Boat); //Met a jour la position du boat dans sa st
 
 void setNewBoatSens(Boat* Boat, char ** MatriceDecision, BoatList *ListeDesBoats); //Met a jour le Sens du boat en fonction du coefficient de la MatriceDecision sur lequel il se trouve
 
-void roulementBoatsPosition(char** MatriceDecision, BoatList **List); // Met a jour toutes les positions des boat d'une BoatList
+void roulementBoatsPosition(char ** MatriceMap,char** MatriceDecision, BoatList **List); // Met a jour toutes les positions des boat d'une BoatList
 
 Coordonnees* positionFutureBoat(Boat* Boat); //Renvoie un struct Coordonnees qui est la position future du Boat
 
@@ -69,3 +69,5 @@ void affichageBoat(Boat* B); //Fonction d'affichage de bateau
 void EaterOrNot(Boat* Boat, BoatList** ListeDesBoats); //Fonction testant si oui ou non le bateau est en fin de map
 
 char AleatoireCustomBoat(); //Renvoie aleatoirement un skin de bateau
+
+void affichagePartielBoat(char ** matrice, Boat * B);

@@ -40,7 +40,7 @@ void setNewPositionVehicule(Vehicule* vehicule)
 
 int Obstacle(char** MatriceDecision, int i, int j)
 {
-	if(MatriceDecision[i][j]!='c' && MatriceDecision[i][j]!='f')
+	if(MatriceDecision[i][j]!='L')
 	{
 		return 0;
 	}
@@ -51,7 +51,8 @@ int Obstacle(char** MatriceDecision, int i, int j)
 }
 
 
-void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesVehicules)
+
+void roulementVehiculesPosition(char ** MatriceMap,char** MatriceDecision, VehiculeList** ListeDesVehicules)
 {
 	VehiculeList *tmp;
 	tmp = *ListeDesVehicules;
@@ -60,7 +61,7 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesV
 			Position* NextPosition = positionFuture(tmp->Vehicule); // Afin de free plus tard
 			if(Obstacle(MatriceDecision, NextPosition->posX, NextPosition->posY)==0)
 			{
-				if((MatriceDecision[NextPosition->posX][NextPosition->posY]=='P')&&((tmp->Vehicule->Compteur)<8))
+				if((MatriceDecision[NextPosition->posX][NextPosition->posY]=='P')&&((tmp->Vehicule->Compteur)<20))
 				{
 					affichageVehicule(tmp->Vehicule);
 					//ANIMATION DE REMPLISSAGE DU PLEIN?
@@ -70,30 +71,34 @@ void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** ListeDesV
 				else
 				{
 					MatriceDecision[tmp->Vehicule->posX][tmp->Vehicule->posY] = tmp->Vehicule->CaseDecision; //La ou la voiture etait devient de la route (place libre)
+					affichagePartielVehicule(MatriceMap, tmp->Vehicule);
 					setNewPositionVehicule(tmp->Vehicule); //On actualise la position de la voiture dans la structure 
 					tmp->Vehicule->CaseDecision = MatriceDecision[NextPosition->posX][NextPosition->posY]; // MAJ de la case decision
 					if(tmp->Vehicule->CaseDecision == 'E')
 					{
+						affichagePartielVehicule(MatriceMap, tmp->Vehicule);
 						tmp = vehiculeEater(ListeDesVehicules, tmp->Vehicule);
 
 					}
 					else
-					{
-					setNewVehiculeDirection(tmp->Vehicule, MatriceDecision, *ListeDesVehicules); //On actualise la Direction du vehicule
-					MatriceDecision[NextPosition->posX][NextPosition->posY] = 'c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
-					affichageVehicule(tmp->Vehicule);	
-					tmp = tmp->next;
+					{	
+						affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+						setNewVehiculeDirection(tmp->Vehicule, MatriceDecision, *ListeDesVehicules); //On actualise la Direction du vehicule
+						MatriceDecision[NextPosition->posX][NextPosition->posY] = 'c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
+						affichageVehicule(tmp->Vehicule);	
+						tmp = tmp->next;
 					}
 				}
 			}
 			else 
 			{
+				affichagePartielVehicule(MatriceMap, tmp->Vehicule);
 				affichageVehicule(tmp->Vehicule);
-				tmp = tmp->next;
 			}
 			free(NextPosition);
 		}
 }
+
 
 
 VehiculeList* vehiculeEater(VehiculeList **List, Vehicule* Vehicule)
@@ -213,28 +218,45 @@ Direction directionAleatoire(Direction A, Direction B)
 
 void placeTerminale(int posX, int posY)
 {
-	printf("\33[%d;%dH",posX,posY);
+	printf("\033[%d;%dH",posX,posY);
 }
 
 void affichageVehicule(Vehicule* V)
 {
-	switch(V->custom)
+/*
+🚔
+🏇
+🔥
+🚖
+🚍
+🚘
+*/	switch(V->custom)
 	{
 		case 'v': 
 			couleur("32");
-			printf("\033[%d;%dH🚘",V->posX,V->posY);
+			printf("\033[%d;%dH🚘\n",V->posX,V->posY);
+			couleur("0");
+			break;
+
 		case 'o': 
 			couleur("33");
-			printf("\033[%d;%dH🚍",V->posX,V->posY);
+			printf("\033[%d;%dH🚘\n",V->posX,V->posY);
+			couleur("0");
+			break;
+
 		case 'r': 
 			couleur("31");
-			printf("\033[%d;%dH🚘",V->posX,V->posY);
+			printf("\033[%d;%dH🚘\n",V->posX,V->posY);
+			couleur("0");
+			break;
+
 		case 'b': 
 			couleur("35");
-			printf("\033[%d;%dH🚖",V->posX,V->posY);
-		case 's': 
-			couleur("37");
-			printf("\033[%d;%dH🚘",V->posX,V->posY);
+			printf("\033[%d;%dH🚘\n",V->posX,V->posY);
+			couleur("0");
+			break;
+
+		case 's': printf("\033[%d;%dH🚘\n",V->posX,V->posY);break;
 	}
 }
 
@@ -253,4 +275,57 @@ char AleatoireCustomVehicule()
 		default:
 		return 's'; break;
 	}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+void affichagePartielVehicule(char ** MatriceMap, Vehicule * V){
+
+	char caractere;;
+	
+	for(int i = 0; i<2; i++){
+
+		caractere = MatriceMap[V->posX][V->posY+i];
+
+		printf("\033[%d;%dH",V->posX,V->posY+i);
+		
+		switch(caractere){
+				case '#': couleur("45");printf("♨");couleur("0");break;
+				//eau
+				case '~': couleur("46");printf(" ");couleur("0");break;
+				//caracteres liés a la route
+				case 's': couleur("32");printf("¤");couleur("0");break;
+				case '|': couleur("32");printf("|");couleur("0");break;
+				case 'r': couleur("32");printf("─");couleur("0");break;
+				case 'u': couleur("32");printf("│");couleur("0");break;
+				case 'x': couleur("34");printf(" ");couleur("0");break;
+				case 'y': couleur("32");printf("☰");couleur("0");break;
+			 	case 'g': couleur("32");printf("←");couleur("0");break;
+				case 'd': couleur("32");printf("→");couleur("0");break;
+				case 'h': couleur("32");printf("↑");couleur("0");break;
+				case 'b': couleur("32");printf("↓");couleur("0");break;
+				case 'p': couleur("44");printf(" ");couleur("0");break;
+				case 'n': printf("⛱");break;
+				//caracters spéciaux:
+				case 'k': printf("═");break;
+				case 'l': printf("╚");break;
+				case 'm': printf("║");break;
+				case 'o': printf("╝");break;
+				case 'q': printf("╗");break;
+				case 't': printf("╔");break;
+				case 'v': printf("─");break;
+				case 'w': printf("│");break;
+				case 'z': printf("┐");break;
+				case 'a': printf("┌");break;
+				case 'c': printf("┘");break;
+				case 'e': printf("└");break;
+				case 'f': printf("╮");break;
+				case 'i': printf("╯");break;
+				case 'j': printf("╰");break;
+				case '!': printf("╭");break;
+				case '%': printf("▒");break;
+				case '*': printf("▓");break;
+				//caracteres par default
+				default: printf("%c",caractere);break;
+		}
+	}			
+
 }

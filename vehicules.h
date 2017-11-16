@@ -81,7 +81,7 @@ void placeTerminale(int posX, int posY); //Fonction permettant de s'éviter la s
 
 void setNewPositionVehicule(Vehicule* vehicule); //Met a jour la position de la voiture dans sa struct
 
-void roulementVehiculesPosition(char** MatriceDecision, VehiculeList** List); //Actualise la position des vehicules
+void roulementVehiculesPosition(char ** MatriceMap, char** MatriceDecision, VehiculeList** List); //Actualise la position des vehicules
 
 Vehicule* oldVehiculeSpawner(int posX, int posY, Direction Direction); // Ancienne fonction pour tester un truc
 
@@ -90,3 +90,5 @@ int Obstacle(char** MatriceDecision, int i, int j);
 void affichageVehicule(Vehicule* V); //Fonction d'affichage de Vehicule
 
 char AleatoireCustomVehicule(); // Renvoie un skin de vehicule aléatoirement
+
+void affichagePartielVehicule(char ** matrice, Vehicule * V);

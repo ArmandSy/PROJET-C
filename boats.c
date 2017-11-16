@@ -130,7 +130,7 @@ Coordonnees* positionFutureBoat(Boat* Boat)
 	}
 }
 
-void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
+void roulementBoatsPosition(char ** MatriceMap,char** MatriceDecision, BoatList** ListeDesBoats)
 {
 	BoatList *tmp;
 	tmp = *ListeDesBoats;
@@ -147,6 +147,7 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 			if(tmp->Boat->CaseDecision == 'D') // S'il passe sous un pont
 			{
 					MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = tmp->Boat->CaseDecision; //On remet le D à sa place
+					affichagePartielBoat(MatriceMap,tmp->Boat); 
 					setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
 					tmp->Boat->CaseDecision = 'F'; // Mode fantome, le bateau est sous le pont
 					tmp = tmp->next;
@@ -154,7 +155,8 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 			else if(tmp->Boat->CaseDecision == 'F') //Mode fantome, le bateau est sous le pont
 			{
 					if(MatriceDecision[NextCoordonnees->posX][NextCoordonnees->posY]=='A')
-					{
+					{	
+						affichagePartielBoat(MatriceMap,tmp->Boat);
 						setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
 						tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
 						MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'L'; // Mise a jour de la MatriceDecison
@@ -170,6 +172,7 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 			{
 
 			MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = tmp->Boat->CaseDecision; //La case ou se trouvait le bateau redevient de l'eau
+			affichagePartielBoat(MatriceMap,tmp->Boat);
 			setNewPositionBoat(tmp->Boat); // Mise a jour de la position du Boat dans sa structure
 			tmp->Boat->CaseDecision = MatriceDecision[tmp->Boat->posX][tmp->Boat->posY]; //Mise à jour de sa CaseDecision
 			setNewBoatSens(tmp->Boat, MatriceDecision, *ListeDesBoats); //Mise a jour de la Direction du Bateau en fonction de la ou il se situe sur la MatriceDecison
@@ -177,6 +180,7 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 			affichageBoat(tmp->Boat);
 				if (tmp->Boat->CaseDecision == 'E')
 				{
+					affichagePartielBoat(MatriceMap,tmp->Boat);
 					tmp = boatEater(ListeDesBoats, tmp->Boat);
 				}
 				else
@@ -189,24 +193,24 @@ void roulementBoatsPosition(char** MatriceDecision, BoatList** ListeDesBoats)
 	}
 }
 
-void affichageBoat(Boat* B){
+void affichageBoat(Boat* B){//⛴
 	switch(B->custom){
 		case 'v': 
 		couleur("30");
 		couleur("46");
-			printf("\033[%d;%dH⛵\n",B->posX,B->posY);
+			printf("\033[%d;%dH⛴\n",B->posX,B->posY);
 			couleur("0");
 			break;
 		case 'o': 
 		couleur("30");
 		couleur("46");
-			printf("\033[%d;%dH🛥\n",B->posX,B->posY);
+			printf("\033[%d;%dH⛴\n",B->posX,B->posY);
 			couleur("0");
 			break;
 		case 'r': 
 		couleur("30");
 		couleur("46");
-			printf("\033[%d;%dH🍩\n",B->posX,B->posY);
+			printf("\033[%d;%dH⛴\n",B->posX,B->posY);
 			couleur("0");
 			break;
 		case 'b': 
@@ -240,3 +244,59 @@ char AleatoireCustomBoat()
 		return 'b'; break;
 	}
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
+void affichagePartielBoat(char ** matrice, Boat * B){
+
+	char caractere;;
+	
+	for(int i = 0; i<2; i++){
+
+		caractere = matrice[B->posX][B->posY+i];
+
+		printf("\033[%d;%dH",B->posX,B->posY+i);
+		
+		switch(caractere){
+				case '#': couleur("45");printf("♨");couleur("0");break;
+				//eau
+				case '~': couleur("46");printf(" ");couleur("0");break;
+				//caracteres liés a la route
+				case 's': couleur("32");printf("¤");couleur("0");break;
+				case '|': couleur("32");printf("|");couleur("0");break;
+				case 'r': couleur("32");printf("─");couleur("0");break;
+				case 'u': couleur("32");printf("│");couleur("0");break;
+				case 'x': couleur("34");printf(" ");couleur("0");break;
+				case 'y': couleur("32");printf("☰");couleur("0");break;
+			 	case 'g': couleur("32");printf("←");couleur("0");break;
+				case 'd': couleur("32");printf("→");couleur("0");break;
+				case 'h': couleur("32");printf("↑");couleur("0");break;
+				case 'b': couleur("32");printf("↓");couleur("0");break;
+				case 'p': couleur("44");printf(" ");couleur("0");break;
+				case 'n': printf("⛱");break;
+				//caracteres spéciaux:
+				case 'k': printf("═");break;
+				case 'l': printf("╚");break;
+				case 'm': printf("║");break;
+				case 'o': printf("╝");break;
+				case 'q': printf("╗");break;
+				case 't': printf("╔");break;
+				case 'v': printf("─");break;
+				case 'w': printf("│");break;
+				case 'z': printf("┐");break;
+				case 'a': printf("┌");break;
+				case 'c': printf("┘");break;
+				case 'e': printf("└");break;
+				case 'f': printf("╮");break;
+				case 'i': printf("╯");break;
+				case 'j': printf("╰");break;
+				case '!': printf("╭");break;
+				case '%': printf("▒");break;
+				case '*': printf("▓");break;
+				case 'H': couleur("32");printf("▓");couleur("0");break;
+				//caracteres par default
+				default: printf("%c",caractere);break;
+		}
+	}			
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+

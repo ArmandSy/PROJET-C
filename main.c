@@ -161,7 +161,7 @@ showMatrix(MatriceDecision);
 //affichageMap();
 
 printf("\e[?25l");
-
+/*
 system("cat Accueil.txt");
 
 int k;
@@ -176,7 +176,7 @@ for(k = 0; k< 100 ; k++)
 			}
 		}
 	}
-
+*/
 /*
 system("xdotool key CTRL+underscore");
 system("xdotool key CTRL+underscore");
@@ -190,7 +190,11 @@ srand(time(NULL)); //Permet d'avoir une graine vraiment aleatoire, sinon directi
 
 char ** MatriceDecision = matrixInit(NBC, NBL);
 
+char ** MatriceMap = matrixInit(NBC,NBL);
+
 textToMatrix(MatriceDecision, "dec.txt");
+
+textToMatrix(MatriceMap, "map1.txt");
 
 BoatList* ListeDesBoats = NULL; 
 
@@ -210,20 +214,27 @@ vehiculeSpawner(22, 194, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecisi
 
 helicoptereSpawner(3, 3, 'c', &ListeDesHelicopteres);
 
-//pietonSpawner(x, y, &ListeDesPietons);
+pietonSpawner(3, 96, SUD, &ListeDesPietons);
 
-tramwaySpawner(65, 114, NORD, &ListeDesTramways); 
-tramwaySpawner(56, 1, EST, &ListeDesTramways);
+//tramwaySpawner(65, 114, 1, 0, NORD, &ListeDesTramways);
+tramwaySpawner(56, 0, 1, 0, EST, &ListeDesTramways);
+
 
 int j = 0;
 int i = 0;
 
 for(i=0; i<240; i++)
 {
-roulementBoatsPosition(MatriceDecision, &ListeDesBoats);
-roulementVehiculesPosition(MatriceDecision, &ListeDesVehicules);
-roulementHelicopteresPosition(MatriceDecision, &ListeDesHelicopteres);
-roulementTramwaysPosition(MatriceDecision, &ListeDesTramways);
+roulementPietonsPosition(MatriceMap, MatriceDecision, &ListeDesPietons);
+roulementBoatsPosition(MatriceMap, MatriceDecision, &ListeDesBoats);
+roulementVehiculesPosition(MatriceMap, MatriceDecision, &ListeDesVehicules);
+roulementHelicopteresPosition(MatriceMap, MatriceDecision, &ListeDesHelicopteres);
+roulementTramwaysPosition(MatriceMap, MatriceDecision, &ListeDesTramways);
+
+if(i==3)
+{
+	vehiculeSpawner(22, 194, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+}
 
 if(i==140)
 {
@@ -234,11 +245,10 @@ if(i==140)
 if(j<4)
 {
 	j++;
-	tramwaySpawner(65, 114, NORD, &ListeDesTramways);
-	tramwaySpawner(56, 1, EST, &ListeDesTramways);
+	//tramwaySpawner(65, 114, j+1, 0, NORD, &ListeDesTramways);
+	tramwaySpawner(56, 0, j+1, 0, EST, &ListeDesTramways);	
 }
-
-affichageMap();
+for(int j = 0; j<20000000; j++){} 
 }
 
 
