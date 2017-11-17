@@ -219,7 +219,6 @@ pietonSpawner(3, 96, SUD, &ListeDesPietons);
 //tramwaySpawner(65, 114, 1, 0, NORD, &ListeDesTramways);
 tramwaySpawner(56, 0, 1, 0, EST, &ListeDesTramways);
 
-
 int j = 0;
 int i = 0;
 
