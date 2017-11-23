@@ -63,7 +63,7 @@ void affichageMap(){
 				case '!': printf("╭");break;
 				case '%': printf("▒");break;
 				case '*': printf("▓");break;
-				case 'H': couleur("32");printf("█");break;
+				case 'H': couleur("32");printf("▓");couleur("0");break;
 				//caracteres par default
 				default: printf("%c",caractere);break;
 			}

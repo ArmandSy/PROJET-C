@@ -53,7 +53,9 @@ typedef struct Position
 	int vitesse;
 	char custom;
 	char CaseDecision;
-	Carburant Carburant;		
+	Carburant Carburant;
+	int virage;	
+
 } Vehicule;
 
 
@@ -92,3 +94,5 @@ void affichageVehicule(Vehicule* V); //Fonction d'affichage de Vehicule
 char AleatoireCustomVehicule(); // Renvoie un skin de vehicule aléatoirement
 
 void affichagePartielVehicule(char ** matrice, Vehicule * V);
+
+void animationDeRemplissage(Vehicule * V);

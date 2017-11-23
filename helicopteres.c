@@ -159,12 +159,12 @@ void roulementHelicopteresPosition(char** MatriceMap, char** MatriceDecision, He
 	while (tmp != NULL)
 		{	
 			Position* NextPosition = positionFutureHelicoptere(tmp->Helicoptere); // Afin de free plus tard
-			if (NextPosition->posX==1 || NextPosition->posY==1 || NextPosition->posX==65 || NextPosition->posY==194)
+			if (NextPosition->posX==1 || NextPosition->posY==1 || NextPosition->posX==66 || NextPosition->posY==194)
 			{
 				affichagePartielHelicoptere(MatriceMap, tmp->Helicoptere);
 				tmp->Helicoptere->posX = NextPosition->posX;
 				tmp->Helicoptere->posY = NextPosition->posY;
-				affichageHelicoptere(tmp->Helicoptere);
+				//affichageHelicoptere(tmp->Helicoptere);
 				tmp = helicoptereEater(ListeDesHelicopteres, tmp->Helicoptere);
 			}
 			else

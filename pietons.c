@@ -55,8 +55,10 @@ void affichagePieton(Pieton* Pieton)
 void affichagePartielPieton(char ** MatriceMap, Pieton* Pieton)
 {
 	char caractere;
+	char caractere2;
 
 		caractere = MatriceMap[Pieton->posX][Pieton->posY];
+		caractere2 = MatriceMap[Pieton->posX][Pieton->posY+1];
 
 		printf("\033[%d;%dH",Pieton->posX,Pieton->posY);
 		
@@ -100,6 +102,50 @@ void affichagePartielPieton(char ** MatriceMap, Pieton* Pieton)
 				//caracteres par default
 				default: printf("%c",caractere);break;
 		}		
+
+		printf("\033[%d;%dH",Pieton->posX,Pieton->posY+1);
+
+		switch(caractere2)
+		{
+				case '#': couleur("45");printf("♨");couleur("0");break;
+				//eau
+				case '~': couleur("46");printf(" ");couleur("0");break;
+				//caracteres liés a la route
+				case 's': couleur("32");printf("¤");couleur("0");break;
+				case '|': couleur("32");printf("|");couleur("0");break;
+				case 'r': couleur("32");printf("─");couleur("0");break;
+				case 'u': couleur("32");printf("│");couleur("0");break;
+				case 'x': couleur("34");printf(" ");couleur("0");break;
+				case 'y': couleur("32");printf("☰");couleur("0");break;
+			 	case 'g': couleur("32");printf("←");couleur("0");break;
+				case 'd': couleur("32");printf("→");couleur("0");break;
+				case 'h': couleur("32");printf("↑");couleur("0");break;
+				case 'b': couleur("32");printf("↓");couleur("0");break;
+				case 'p': couleur("44");printf(" ");couleur("0");break;
+				case 'n': printf("⛱");break;
+				//caracteres spéciaux:
+				case 'k': printf("═");break;
+				case 'l': printf("╚");break;
+				case 'm': printf("║");break;
+				case 'o': printf("╝");break;
+				case 'q': printf("╗");break;
+				case 't': printf("╔");break;
+				case 'v': printf("─");break;
+				case 'w': printf("│");break;
+				case 'z': printf("┐");break;
+				case 'a': printf("┌");break;
+				case 'c': printf("┘");break;
+				case 'e': printf("└");break;
+				case 'f': printf("╮");break;
+				case 'i': printf("╯");break;
+				case 'j': printf("╰");break;
+				case '!': printf("╭");break;
+				case '%': printf("▒");break;
+				case '*': printf("▓");break;
+				case 'H': couleur("32");printf("▓");couleur("0");break;
+				//caracteres par default
+				default: printf("%c",caractere2);break;
+			}
 }
 
 void setNewPietonDirection(Pieton* Pieton, char ** MatriceDecision, PietonList *ListeDesPietons)

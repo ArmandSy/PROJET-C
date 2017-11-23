@@ -181,7 +181,9 @@ void roulementBoatsPosition(char ** MatriceMap,char** MatriceDecision, BoatList*
 				if (tmp->Boat->CaseDecision == 'E')
 				{
 					affichagePartielBoat(MatriceMap,tmp->Boat);
+					MatriceDecision[tmp->Boat->posX][tmp->Boat->posY] = 'E';
 					tmp = boatEater(ListeDesBoats, tmp->Boat);
+					couleur("46");printf("\033[%d;%dH \n",NextCoordonnees->posX,NextCoordonnees->posY);couleur("0");
 				}
 				else
 				{
@@ -298,5 +300,6 @@ void affichagePartielBoat(char ** matrice, Boat * B){
 	}			
 
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
