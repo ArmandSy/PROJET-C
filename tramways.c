@@ -1,15 +1,74 @@
 #include "librairies.h"
 #include "tramways.h"
 
-void tramwaySpawner(int posX, int posY, int compteur, Direction Direction, TramwayList** ListeDesTramways)
+void tramwaySpawner(int posX, int posY, Direction Direction, TramwayList** ListeDesTramways)
 {
-		Tramway* Tram=malloc(sizeof(Tramway));
+		Tramway* Tram = malloc(sizeof(Tramway));
 		Tram->posX = posX;
 		Tram->posY = posY;
 		Tram->CaseDecision = 'S';
 		Tram->Direction = Direction;
-		Tram->compteur = compteur; 
+		Tram->compteur = 0; 
 		appendTramwayList(ListeDesTramways, Tram);
+}
+
+TramwayEater* tramwayEaterInit()
+{
+	TramwayEater* Eater = malloc(sizeof(TramwayEater));
+	Eater->decr = 5;
+	return Eater;
+}
+
+void eaterAffichage(TramwayEater* Eater, int NumeroDeLigne)
+{
+	if(Eater->decr == 0)
+	{
+		Eater->decr = 5;
+	}
+	else
+	{
+		if(NumeroDeLigne == 1)
+		{
+			switch(Eater->decr)
+			{
+				case 4:
+					printf("\033[%d;%dH│\n",63,118);	
+					Eater->decr = Eater->decr -1; break;
+				case 3:
+					printf("\033[%d;%dH│\n",64,118);	
+					Eater->decr = Eater->decr -1; break;
+				case 2:
+					printf("\033[%d;%dH│\n",65,118);	
+					Eater->decr = Eater->decr -1; break;
+				case 1:
+					printf("\033[%d;%dH│\n",66,118);	//64-67 , 119 │
+					Eater->decr = Eater->decr -1; break;
+				default:
+				break;
+			}
+		}
+		else //NumeroDeLigne == 2
+		{
+			switch(Eater->decr)
+			{
+				case 4:
+					printf("\033[%d;%dH─\n",58,5);
+					Eater->decr = Eater->decr -1; break; //59 2-5─
+				case 3:
+					printf("\033[%d;%dH─\n",58,4);
+					Eater->decr = Eater->decr -1; break;
+				case 2:
+					printf("\033[%d;%dH─\n",58,3);
+					Eater->decr = Eater->decr -1; break;
+				case 1:
+					printf("\033[%d;%dH─\n",58,2);
+					printf("\033[%d;%dH─\n",58,1);
+					Eater->decr = Eater->decr -1; break;
+				default:
+				break;
+			}
+		}
+	}
 }
 
 void appendTramwayList(TramwayList** ListeDesTramways, Tramway* Tram)
@@ -48,39 +107,44 @@ TramwayList* tramwayEater(TramwayList **List, Tramway* Tramway)
 
 void affichageTramway(char** MatriceMap, Tramway* Tram)
 {
-	if(Tram->posX == 56)
+	if(Tram->posX == 56) //SPAWN 1
 	{
 		if(Tram->posY <4)
 		{
 			couleur("37");
-			printf("\033[%d;%dH🚋",Tram->posX,Tram->posY);	
+			printf("\033[%d;%dH🚋\n",Tram->posX,Tram->posY);	
+			couleur("0");
 		}
 		else
 		{
 			couleur("37");
-			printf("\033[%d;%dH🚋",Tram->posX,Tram->posY);	
+			printf("\033[%d;%dH🚋\n",Tram->posX,Tram->posY);	
 			affichagePartielTramway(MatriceMap, Tram);
+			couleur("0");
 		}
 	}
-	else if(Tram->posY == 114)
+	else if(Tram->posY == 114)		//SPAWN 2
 	{
-		if(Tram->posX > 61)
+		if(Tram->posX > 65)
 		{
 			couleur("37");
-			printf("\033[%d;%dH🚋",Tram->posX,Tram->posY);
+			printf("\033[%d;%dH🚋\n",Tram->posX,Tram->posY);
+			couleur("0");
 		}
 		else
 		{
 			couleur("37");
-			printf("\033[%d;%dH🚋",Tram->posX,Tram->posY);	
+			printf("\033[%d;%dH🚋\n",Tram->posX,Tram->posY);	
 			affichagePartielTramway(MatriceMap, Tram);
+			couleur("0");
 		}
 	}
-	else
+	else //RESTE DU TEMPS
 	{
 		couleur("37");
-		printf("\033[%d;%dH🚋",Tram->posX,Tram->posY);	
+		printf("\033[%d;%dH🚋\n",Tram->posX,Tram->posY);	
 		affichagePartielTramway(MatriceMap, Tram);	
+		couleur("0");
 	}
 }
 
@@ -95,7 +159,7 @@ int testPositionTramway(Tramway* Tramway)
 	{
 		return 7;
 	}
-	else if(Tramway->posX == 59 && Tramway-> posY == 116)
+	else if(Tramway->posX == 58 && Tramway-> posY == 114)
 	{
 		return 8;
 	}
@@ -134,56 +198,64 @@ void affichagePartielTramway(char ** MatriceMap, Tramway * Tramway)
 		if(testPositionTramway(Tramway) == 1) //1ERE CASE APRES LE 1ER CORNER
 		{
 			printf("\033[%d;%dH",56,115);
-			printf("─");
+			printf("─\n");
 		}
 		else if(testPositionTramway(Tramway) == 2) //2EME
 		{
 			printf("\033[%d;%dH",56,116);
-			printf("─");
+			printf("─\n");
 		}
 		else if(testPositionTramway(Tramway) == 3) //3EME
 		{
 			printf("\033[%d;%dH",56,117);
-			printf("─");
-		}
-		else if(testPositionTramway(Tramway) == 4) //1ERE CASE APRES LE 2EME CORNER
-		{
-			printf("\033[%d;%dH",60,116);
-			printf("│");
-		}
-		else if(testPositionTramway(Tramway) == 5) //2EME
-		{
-			printf("\033[%d;%dH",61,116);
-			printf("│");
-		}
-		else if(testPositionTramway(Tramway) == 6) //3EME
-		{
-			printf("\033[%d;%dH",62,116);
-			printf("│");
+			printf("─\n");
 		}
 		else if(testPositionTramway(Tramway) == 7) //CORNER 1
 		{
 			printf("\033[%d;%dH",56,114);
-			printf("─");
+			printf("─\n");
+		}
+		else if(testPositionTramway(Tramway) == 4) //1ERE CASE APRES LE 2EME CORNER
+		{
+			printf("\033[%d;%dH",59,114);
+			printf("│\n");
+		}
+		else if(testPositionTramway(Tramway) == 5) //2EME
+		{
+			printf("\033[%d;%dH",60,114);
+			printf("│\n");
+		}
+		else if(testPositionTramway(Tramway) == 6) //3EME
+		{
+			printf("\033[%d;%dH",61,114);
+			printf("│\n");
 		}
 		else if(testPositionTramway(Tramway) == 8) //CORNER 2
 		{
-			printf("\033[%d;%dH",61,116);
-			printf("│");
+			printf("\033[%d;%dH",62,114);
+			printf("│\n");
 		}
 		else
 		{
 		switch(Tramway->Direction)
 			{
 			case NORD:
-				caractere = MatriceMap[Tramway->posX-4][Tramway->posY];
-				printf("\033[%d;%dH",Tramway->posX-4,Tramway->posY);
+				caractere = MatriceMap[Tramway->posX+4][Tramway->posY];
+				printf("\033[%d;%dH",Tramway->posX+4,Tramway->posY);
 				break;
 			case EST:
 				caractere = MatriceMap[Tramway->posX][Tramway->posY-4];
 				printf("\033[%d;%dH",Tramway->posX,Tramway->posY-4);
 				break;
 			case OUEST:
+				if(Tramway->CaseDecision != 'F')
+				{
+					couleur("37");
+					printf("\033[%d;%dH🚋\n",Tramway->posX,Tramway->posY+1);
+					printf("\033[%d;%dH🚋\n",Tramway->posX,Tramway->posY+2);
+					printf("\033[%d;%dH🚋\n",Tramway->posX,Tramway->posY+3);	
+					couleur("0");
+				}
 				caractere = MatriceMap[Tramway->posX][Tramway->posY+4];
 				printf("\033[%d;%dH",Tramway->posX,Tramway->posY+4);
 				break;
@@ -230,7 +302,7 @@ void affichagePartielTramway(char ** MatriceMap, Tramway * Tramway)
 				case '%': printf("▒");break;
 				case '*': printf("▓");break;
 				//caracteres par default
-				default: printf("%c",caractere);break;
+				default: printf("%c",' ');break;
 			}
 		}	
 }
@@ -299,7 +371,7 @@ int ObstacleTramway(char ** MatriceDecision, int i, int j)
 	}
 }
 
-void roulementTramwaysPosition(char** MatriceMap, char** MatriceDecision, TramwayList** ListeDesTramways)
+void roulementTramwaysPosition(char** MatriceMap, char** MatriceDecision, TramwayList** ListeDesTramways, TramwayEater* TramwayEater1, TramwayEater* TramwayEater2)
 {
 TramwayList *tmp;
 tmp = *ListeDesTramways;
@@ -311,6 +383,15 @@ while (tmp != NULL)
 			tmp->Tramway->posX = NextPosition->posX;
 			tmp->Tramway->posY = NextPosition->posY;
 			affichageTramway(MatriceMap, tmp->Tramway);
+			if(tmp->Tramway->posX > 60) //s'il s'agit de la Ligne 1
+			{
+				TramwayEater1->decr = TramwayEater1->decr -1;
+			}
+			else //sinon c'est la ligne 2
+			{
+				TramwayEater2->decr = TramwayEater2->decr -1;
+				printf("\033[%d;%dH─\n",58,6);
+			}
 			tmp = tramwayEater(ListeDesTramways, tmp->Tramway);
 		}
 		else if (ObstacleTramway(MatriceDecision, NextPosition->posX, NextPosition->posY) == 1)
@@ -349,7 +430,6 @@ while (tmp != NULL)
 			}
 			else 
 			{ 
-				affichagePartielTramway(MatriceMap, tmp->Tramway);
 				tmp->Tramway->compteur = 0;
 				tmp->Tramway->posX = NextPosition->posX;
 				tmp->Tramway->posY = NextPosition->posY;

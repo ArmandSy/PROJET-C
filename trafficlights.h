@@ -1,36 +1,42 @@
 #include "librairies.h"
 
 #define trafficlights
-/*
-enum Color	//Enumeration des couleurs pour les feux
+
+#ifndef direction
+
+enum Direction // Enumeration des directions possibles pour une entité
 {
-	VERT,
-	ORANGE,
-	ROUGE,
-	ROUGEINTER
+	NORD,
+	EST,
+	OUEST,
+	SUD,
 };
 
-typedef enum Color Color;
+typedef enum Direction Direction;
 
-enum Timers	//Enumeration des temps requis pour les roulements des feux 
+#define direction
+
+#endif
+
+#ifndef tram
+
+	typedef struct Tramway
 {
-	TIMER_GREEN = 20,
-	TIMER_ORANGE = 5,
-	TIMER_ROUGE = 20,
-	TIMER_ROUGEINTER = 5
-};
-
-typedef enum Timers Timers;
-
-typedef struct TrafficLight	
-{
-	Color Current_Color;
-	Timers TimeForSwitch;
 	int posX;
 	int posY;
-	int Compteur;
-} TrafficLight;
-*/
+	int vitesse;
+	char CaseDecision;
+	Direction Direction;
+	int compteur;
+	int compteur2;
+	int virage;
+} Tramway;
+
+#define tram
+
+#endif
+
+
 
 typedef struct TrafficLight	
 {

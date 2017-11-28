@@ -163,6 +163,10 @@ showMatrix(MatriceDecision);
 
 printf("\e[?25l");
 /*
+printf("\033[10;10H🚘");
+printf("\033[10;8H🚘");
+printf("\033[15;0H");
+
 system("cat Accueil.txt");
 
 int k;
@@ -222,6 +226,9 @@ appendTrafficLightList(&Liste, FEU8);
 appendTrafficLightList(&Liste, FEU9);
 appendTrafficLightList(&Liste, FEU10);
 
+TramwayEater* TramwayEater1 = tramwayEaterInit();
+TramwayEater* TramwayEater2 = tramwayEaterInit();
+
 BoatList* ListeDesBoats = NULL; 
 
 VehiculeList* ListeDesVehicules = NULL;
@@ -248,26 +255,44 @@ pietonSpawner(3, 96, SUD, &ListeDesPietons);
 
 lapinSpawner(37, 21, &ListeDesLapins);
 
-//tramwaySpawner(65, 114, 1, 0, NORD, &ListeDesTramways);
-tramwaySpawner(56, 0, 0, EST, &ListeDesTramways);
+tramwaySpawner(67, 114, NORD, &ListeDesTramways);
+tramwaySpawner(56, 0, EST, &ListeDesTramways);
+
 
 int i = 0;
 
-for(i=0; i<800; i++)
+for(i=0; i<100; i++)
 {
 roulementPietonsPosition(MatriceMap, MatriceDecision, &ListeDesPietons);
 roulementBoatsPosition(MatriceMap, MatriceDecision, &ListeDesBoats);
-roulementVehiculesPosition(MatriceMap, MatriceDecision, &ListeDesVehicules);
+roulementVehiculesPosition(MatriceMap, &MatriceDecision, &ListeDesVehicules);
 roulementHelicopteresPosition(MatriceMap, MatriceDecision, &ListeDesHelicopteres);
 roulement_feux(&Liste, &MatriceDecision);
-roulementTramwaysPosition(MatriceMap, MatriceDecision, &ListeDesTramways);
-boatSpawner(21+rand()%6, 1, DROITE, AleatoireCustomBoat(), MatriceDecision, &ListeDesBoats); //A ce rythme là c'est la bataille navale lol
+roulementTramwaysPosition(MatriceMap, MatriceDecision, &ListeDesTramways, TramwayEater1, TramwayEater2);
+eaterAffichage(TramwayEater1,1);
+eaterAffichage(TramwayEater2,2);
 
-if(i==3)
+if(i==1)
 {
-	vehiculeSpawner(22, 194, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+	vehiculeSpawner(22, 193, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+	vehiculeSpawner(47, 2, EST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
 }
-
+if(i==10)
+{
+	vehiculeSpawner(22, 193, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+	vehiculeSpawner(47, 2, EST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+}
+if(i==30)
+{
+	vehiculeSpawner(22, 193, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+	vehiculeSpawner(47, 2, EST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+}
+if(i==90)
+{
+	vehiculeSpawner(22, 193, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+	vehiculeSpawner(47, 2, EST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+	i=0;
+}
 if(i%15 == 0)
 {
 	roulementLapinsPosition(MatriceMap, MatriceDecision, &ListeDesLapins);

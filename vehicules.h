@@ -24,6 +24,8 @@ enum Carburant	// Enumeration des differents etats du carburant pour un vehicule
 
 typedef enum Carburant Carburant;
 
+#ifndef direction
+
 enum Direction // Enumeration des directions possibles pour une entité
 {
 	NORD,
@@ -35,6 +37,8 @@ enum Direction // Enumeration des directions possibles pour une entité
 typedef enum Direction Direction;
 
 #define direction
+
+#endif
 
 typedef struct Position
 {
@@ -83,7 +87,7 @@ void placeTerminale(int posX, int posY); //Fonction permettant de s'éviter la s
 
 void setNewPositionVehicule(Vehicule* vehicule); //Met a jour la position de la voiture dans sa struct
 
-void roulementVehiculesPosition(char ** MatriceMap, char** MatriceDecision, VehiculeList** List); //Actualise la position des vehicules
+void roulementVehiculesPosition(char ** MatriceMap, char*** MatriceDecision, VehiculeList** List); //Actualise la position des vehicules
 
 Vehicule* oldVehiculeSpawner(int posX, int posY, Direction Direction); // Ancienne fonction pour tester un truc
 

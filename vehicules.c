@@ -40,7 +40,7 @@ void setNewPositionVehicule(Vehicule* vehicule)
 
 int Obstacle(char** MatriceDecision, int i, int j)
 {
-	if(MatriceDecision[i][j]!='L')
+	if(MatriceDecision[i][j]!='c')
 	{
 		return 0;
 	}
@@ -51,55 +51,79 @@ int Obstacle(char** MatriceDecision, int i, int j)
 }
 
 
-
-void roulementVehiculesPosition(char ** MatriceMap,char** MatriceDecision, VehiculeList** ListeDesVehicules)
+void roulementVehiculesPosition(char ** MatriceMap,char*** MatriceDecision, VehiculeList** ListeDesVehicules)
 {
+	int sortie;
 	VehiculeList *tmp;
 	tmp = *ListeDesVehicules;
 	while (tmp != NULL)
 		{	
+			sortie = 0;
 			Position* NextPosition = positionFuture(tmp->Vehicule); // Afin de free plus tard
-			if(Obstacle(MatriceDecision, NextPosition->posX, NextPosition->posY)==0)
-			{
-				if((MatriceDecision[NextPosition->posX][NextPosition->posY]=='P')&&((tmp->Vehicule->Compteur)<30))
-				{
-					affichageVehicule(tmp->Vehicule);
-					animationDeRemplissage(tmp->Vehicule);
-					tmp->Vehicule->Compteur = tmp->Vehicule->Compteur +1;
-					tmp = tmp->next;
-				}
-				else
-				{
-					MatriceDecision[tmp->Vehicule->posX][tmp->Vehicule->posY] = tmp->Vehicule->CaseDecision; //La ou la voiture etait devient de la route (place libre)
-					affichagePartielVehicule(MatriceMap, tmp->Vehicule);
-					setNewPositionVehicule(tmp->Vehicule); //On actualise la position de la voiture dans la structure 
-					tmp->Vehicule->CaseDecision = MatriceDecision[NextPosition->posX][NextPosition->posY]; // MAJ de la case decision
-					if(tmp->Vehicule->CaseDecision == 'E')
-					{
-						affichagePartielVehicule(MatriceMap, tmp->Vehicule);
-						MatriceDecision[tmp->Vehicule->posX][tmp->Vehicule->posY] = 'E';
-						tmp = vehiculeEater(ListeDesVehicules, tmp->Vehicule);
+			if (tmp->Vehicule->Direction == EST){
 
-					}
-					else
-					{	
-						affichagePartielVehicule(MatriceMap, tmp->Vehicule);
-						setNewVehiculeDirection(tmp->Vehicule, MatriceDecision, *ListeDesVehicules); //On actualise la Direction du vehicule
-						MatriceDecision[NextPosition->posX][NextPosition->posY] = 'c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
-						affichageVehicule(tmp->Vehicule);	
-						tmp = tmp->next;
-					}
+				if((*MatriceDecision)[NextPosition->posX][NextPosition->posY+1] =='c'){
+					tmp = tmp ->next;
+					sortie = 1;
 				}
 			}
-			else 
-			{
-				affichagePartielVehicule(MatriceMap, tmp->Vehicule);
-				affichageVehicule(tmp->Vehicule);
+			else if(tmp->Vehicule->Direction == OUEST){
+
+				if((*MatriceDecision)[NextPosition->posX][NextPosition->posY-1] =='c'){
+					tmp = tmp ->next;
+					sortie = 1;
+				}
+			}
+			if(sortie == 1){
+					//ne rien faire
+			}else{
+				if((*MatriceDecision)[NextPosition->posX][NextPosition->posY] == 'f')
+				{
+					//affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+					//affichageVehicule(tmp->Vehicule);
+					
+					tmp = tmp ->next;
+				}
+				else if((*MatriceDecision)[NextPosition->posX][NextPosition->posY] =='c')
+				{
+					
+					tmp = tmp ->next;
+				}	
+				else
+				{
+					if(((*MatriceDecision)[NextPosition->posX][NextPosition->posY]=='P')&&((tmp->Vehicule->Compteur)<31))
+					{
+						affichageVehicule(tmp->Vehicule);
+						animationDeRemplissage(tmp->Vehicule);
+						tmp->Vehicule->Compteur = tmp->Vehicule->Compteur +1;
+						tmp = tmp->next;
+					}
+					else
+					{
+						(*MatriceDecision)[tmp->Vehicule->posX][tmp->Vehicule->posY] = tmp->Vehicule->CaseDecision; //La ou la voiture etait devient de la route (place libre)
+						affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+						setNewPositionVehicule(tmp->Vehicule); //On actualise la position de la voiture dans la structure 
+						tmp->Vehicule->CaseDecision = (*MatriceDecision)[NextPosition->posX][NextPosition->posY]; // MAJ de la case decision
+							if(tmp->Vehicule->CaseDecision == 'E')
+						{
+							affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+							tmp = vehiculeEater(ListeDesVehicules, tmp->Vehicule);	
+
+						}
+						else
+						{	
+							affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+							setNewVehiculeDirection(tmp->Vehicule, (*MatriceDecision), *ListeDesVehicules); //On actualise la Direction du vehicule
+							(*MatriceDecision)[NextPosition->posX][NextPosition->posY] = 'c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
+							affichageVehicule(tmp->Vehicule);	
+							tmp = tmp->next;
+						}
+					}
+				}
 			}
 			free(NextPosition);
 		}
 }
-
 
 
 VehiculeList* vehiculeEater(VehiculeList **List, Vehicule* Vehicule)
