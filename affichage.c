@@ -44,6 +44,7 @@ void affichageMap(){
 				case 'h': couleur("32");printf("↑");couleur("0");break;
 				case 'b': couleur("32");printf("↓");couleur("0");break;
 				case 'p': couleur("44");printf(" ");couleur("0");break;
+				case 'Z': couleur("38;5;52");printf("▓");couleur("0");break;
 				case 'n': printf("⛱");break;
 				//caracters spéciaux:
 				case 'k': printf("═");break;
@@ -108,6 +109,7 @@ void affichageMenu(char * nomDuFichier){
 				case 'R': couleur("38;5;46");printf("$");couleur("0");break;
 				case 'K': couleur("38;5;51");printf("$");couleur("0");break;
 				case '$': couleur("38;5;196");printf("$");couleur("0");break;
+
 				//carateres menus
 				//case 'M': couleur("32");printf("🌼");couleur("0");break;//ansi color sur wikipedia ##############
 				/*case 'm': couleur("1;41");printf("▓");couleur("0");break;

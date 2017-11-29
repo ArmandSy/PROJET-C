@@ -294,6 +294,7 @@ void affichagePartielBoat(char ** matrice, Boat * B){
 				case '%': printf("▒");break;
 				case '*': printf("▓");break;
 				case 'H': couleur("32");printf("▓");couleur("0");break;
+				case 'Z': couleur("38;5;52");printf("▓");couleur("0");break;
 				//caracteres par default
 				default: printf("%c",caractere);break;
 		}

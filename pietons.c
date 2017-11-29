@@ -99,6 +99,7 @@ void affichagePartielPieton(char ** MatriceMap, Pieton* Pieton)
 				case '%': printf("▒");break;
 				case '*': printf("▓");break;
 				case 'H': couleur("32");printf("▓");couleur("0");break;
+				case 'Z': couleur("38;5;52");printf("▓");couleur("0");break;
 				//caracteres par default
 				default: printf("%c",caractere);break;
 		}		
@@ -143,6 +144,7 @@ void affichagePartielPieton(char ** MatriceMap, Pieton* Pieton)
 				case '%': printf("▒");break;
 				case '*': printf("▓");break;
 				case 'H': couleur("32");printf("▓");couleur("0");break;
+				case 'Z': couleur("38;5;52");printf("▓");couleur("0");break;
 				//caracteres par default
 				default: printf("%c",caractere2);break;
 			}
@@ -163,9 +165,32 @@ void setNewPietonDirection(Pieton* Pieton, char ** MatriceDecision, PietonList *
 			break;
 		case 'b':
 			Pieton->Direction = SUD; 
+			break;
+		case 'q':
+			Pieton->Direction = directionRandom(NORD,OUEST);
+			break;
+		case 'x':
+			Pieton->Direction = directionRandom(NORD, EST);
+			break;
+		case 'z':
+			Pieton->Direction = directionRandom(EST,OUEST);
+			break;
 	}
 
 }
+
+Direction directionRandom(Direction A, Direction B)
+{
+	int i = rand()%2;
+	if (i%2==1) {
+			return A;
+	}
+	else {
+
+			return B;
+	}
+}
+
 
 Position* positionFuturePieton(Pieton* Pieton)
 {
@@ -219,7 +244,6 @@ while (tmp != NULL)
 			affichagePartielPieton(MatriceMap, tmp->Pieton);
 			tmp->Pieton->posX = NextPosition->posX;
 			tmp->Pieton->posY = NextPosition->posY;
-			affichagePieton(tmp->Pieton);
 			tmp = pietonEater(ListeDesPietons, tmp->Pieton);
 		}
 		else if (ObstaclePieton(MatriceDecision, NextPosition->posX, NextPosition->posY) == 1)
@@ -235,7 +259,6 @@ while (tmp != NULL)
 					affichagePartielPieton(MatriceMap, tmp->Pieton);
 					tmp->Pieton->posX = NextPosition->posX;
 					tmp->Pieton->posY = NextPosition->posY;
-					affichagePieton(tmp->Pieton);
 					tmp->Pieton->CaseDecision = 'F'; //Passage en mode fantome
 					tmp = tmp->next;
 			}
