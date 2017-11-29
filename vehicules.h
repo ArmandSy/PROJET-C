@@ -24,8 +24,6 @@ enum Carburant	// Enumeration des differents etats du carburant pour un vehicule
 
 typedef enum Carburant Carburant;
 
-#ifndef direction
-
 enum Direction // Enumeration des directions possibles pour une entité
 {
 	NORD,
@@ -37,8 +35,6 @@ enum Direction // Enumeration des directions possibles pour une entité
 typedef enum Direction Direction;
 
 #define direction
-
-#endif
 
 typedef struct Position
 {

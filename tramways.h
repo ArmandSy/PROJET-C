@@ -75,3 +75,7 @@ int testPositionTramway(Tramway* Tramway);
 TramwayEater* tramwayEaterInit();
 
 void eaterAffichage(TramwayEater* TramwayEater, int NumeroDeLigne);
+
+void feuxDeTram(char ***MatriceDecision, char **MatriceMap, Tramway * T1, Tramway * T2);
+
+int compteurDeTramways(TramwayList** ListeDesTramways);

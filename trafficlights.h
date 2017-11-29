@@ -1,5 +1,5 @@
 #include "librairies.h"
-
+/*
 #define trafficlights
 
 #ifndef direction
@@ -35,7 +35,7 @@ typedef enum Direction Direction;
 #define tram
 
 #endif
-
+*/
 
 
 typedef struct TrafficLight	
@@ -75,3 +75,5 @@ void modificationDuFeu(TrafficLight * T, char *** MatriceDecision, char caracter
 void affichageFeu(TrafficLight* trafficLight); //Fonction d'affichage de trafficlights
 
 void modificationDeMatrice(TrafficLight * T, char *** MatriceDecision, char caractere);
+
+//void feuxDeTram(char ***MatriceDecision, char **MatriceMap, Tramway * T1, Tramway * T2);
