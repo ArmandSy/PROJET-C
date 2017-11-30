@@ -63,6 +63,7 @@ void roulementVehiculesPosition(char ** MatriceMap,char*** MatriceDecision, Vehi
 			if (tmp->Vehicule->Direction == EST){
 
 				if((*MatriceDecision)[NextPosition->posX][NextPosition->posY+1] =='c'){
+					affichageVehicule(tmp->Vehicule);
 					tmp = tmp ->next;
 					sortie = 1;
 				}
@@ -70,6 +71,7 @@ void roulementVehiculesPosition(char ** MatriceMap,char*** MatriceDecision, Vehi
 			else if(tmp->Vehicule->Direction == OUEST){
 
 				if((*MatriceDecision)[NextPosition->posX][NextPosition->posY-1] =='c'){
+					affichageVehicule(tmp->Vehicule);
 					tmp = tmp ->next;
 					sortie = 1;
 				}
@@ -79,14 +81,12 @@ void roulementVehiculesPosition(char ** MatriceMap,char*** MatriceDecision, Vehi
 			}else{
 				if((*MatriceDecision)[NextPosition->posX][NextPosition->posY] == 'f')
 				{
-					//affichagePartielVehicule(MatriceMap, tmp->Vehicule);
-					//affichageVehicule(tmp->Vehicule);
-					
+					affichageVehicule(tmp->Vehicule);
 					tmp = tmp ->next;
 				}
 				else if((*MatriceDecision)[NextPosition->posX][NextPosition->posY] =='c')
 				{
-					
+					affichageVehicule(tmp->Vehicule);
 					tmp = tmp ->next;
 				}	
 				else
@@ -203,33 +203,17 @@ void vehiculeSpawner(int posX, int posY, Direction Direction, Carburant Carburan
 	appendVehiculeList(ListeDesVehicules, Veh);
 }
 
-Vehicule* oldVehiculeSpawner(int posX, int posY, Direction Direction)
-{
-	Vehicule* Veh=malloc(sizeof(Vehicule));
-	Veh->posX=posX;
-	Veh->posY=posY;
-	Veh->Direction=Direction;
-	return Veh;
-}
-
-void visualiserVehiculeList(VehiculeList *List)
-{
-	VehiculeList *tmp;
-	tmp = List;
-
-	while (tmp != NULL) 
-	{
-			printf("posX:%d\n",tmp->Vehicule->posX);
-			printf("posY:%d\n",tmp->Vehicule->posY);
-			tmp = tmp->next;
-	}
-}
 
 void setNewVehiculeDirection(Vehicule* Vehicule, char ** MatriceDecision, VehiculeList *ListeDesVehicules)
 {
 	switch(MatriceDecision[Vehicule->posX][Vehicule->posY])
 	{
-	
+
+	case 'n':
+		Vehicule->virage =0;break;
+
+	case 'i': 
+		Vehicule->virage = 2;break;
 	case 'd':
 		Vehicule->Direction = EST; break;
 	case 'h':
@@ -289,10 +273,6 @@ void setNewVehiculeDirection(Vehicule* Vehicule, char ** MatriceDecision, Vehicu
 		{
 			Vehicule->Direction = SUD;
 		}
-	case 'r':
-		Vehicule->virage = 0; //reset
-	case 'm':
-		Vehicule->virage =  Vehicule->virage + 1;
 		// FAIRE UNE ANIMATION?
 	}
 }
@@ -309,22 +289,9 @@ Direction directionAleatoire(Direction A, Direction B)
 	}
 }
 
-
-void placeTerminale(int posX, int posY)
+void affichageVehicule(Vehicule* V)// 🚔🏇🔥🚖🚍🚘
 {
-	printf("\033[%d;%dH",posX,posY);
-}
-
-void affichageVehicule(Vehicule* V)
-{
-/*
-🚔
-🏇
-🔥
-🚖
-🚍
-🚘
-*/	switch(V->custom)
+	switch(V->custom)
 	{
 		case 'v': 
 			couleur("32");
@@ -382,7 +349,9 @@ void affichagePartielVehicule(char ** MatriceMap, Vehicule * V){
 		printf("\033[%d;%dH",V->posX,V->posY+i);
 		
 		switch(caractere){
-				case '#': couleur("45");printf("♨");couleur("0");break;
+				//herbe
+				case '#': couleur("38;5;46");printf("♨");couleur("0");break;
+				case '?': couleur("48;5;22");printf(" ");couleur("0");break;
 				//eau
 				case '~': couleur("46");printf(" ");couleur("0");break;
 				//caracteres liés a la route
@@ -397,6 +366,7 @@ void affichagePartielVehicule(char ** MatriceMap, Vehicule * V){
 				case 'h': couleur("32");printf("↑");couleur("0");break;
 				case 'b': couleur("32");printf("↓");couleur("0");break;
 				case 'p': couleur("44");printf(" ");couleur("0");break;
+				case 'Z': couleur("48;5;52");printf(" ");couleur("0");break;
 				case 'n': printf("⛱");break;
 				//caracters spéciaux:
 				case 'k': printf("═");break;
@@ -426,22 +396,23 @@ void affichagePartielVehicule(char ** MatriceMap, Vehicule * V){
 
 void animationDeRemplissage(Vehicule * V){
 	switch(V->Compteur){
+		//le personnage sort de la voiture
 		case 0: printf("\033[%d;%dH🚶", V->posX-1, V->posY);
 				couleur("35");
 				printf("\033[%d;%dH", V->posX+1, V->posY-3);printf("╭═════╮");
 				printf("\033[%d;%dH", V->posX+2, V->posY-3);printf("╰═════╯");
 				couleur("0");
 				break;
-
-		case 1: printf("\033[%d;%dH🚶", V->posX-1, V->posY+1);
-		case 2: couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
-		case 3: couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
-		case 4: couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
-		case 5: couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
-		case 6: couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
-		case 7: couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
-		case 8: couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
-		case 9: couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
+		//il fait le plein
+		case 1:  printf("\033[%d;%dH🚶", V->posX-1, V->posY+1);
+		case 2:  couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
+		case 3:  couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
+		case 4:  couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
+		case 5:  couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
+		case 6:  couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
+		case 7:  couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
+		case 8:  couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
+		case 9:  couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
 		case 10: couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
 		case 11: couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
 		case 12: couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
@@ -461,17 +432,11 @@ void animationDeRemplissage(Vehicule * V){
 		case 26: couleur("34");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
 		case 27: couleur("35");printf("\033[%d;%dH╭", V->posX-1, V->posY);couleur("0");break;
 		case 28: printf("\033[%d;%dH ", V->posX-1, V->posY);break;
-		
+		//le personnage rentre dans la voiture
 		case 29: printf("\033[%d;%dH ", V->posX-1, V->posY+1);printf("\033[%d;%dH🚶", V->posX-1, V->posY);break;
 		case 30: printf("\033[%d;%dH ", V->posX-1, V->posY);
 				 printf("\033[%d;%dH", V->posX+1, V->posY-3);printf("╭═════╮");
 				 printf("\033[%d;%dH", V->posX+2, V->posY-3);printf("╰═════╯");
-				break;
-	}//🚶🏃‍🚶‍🏃
-	//on prend une voiture puis on fait l'animation en un certain nombre de frame comme pour la barriere.
-	//le personnage sort de son vehicule
-	//bouge
-	//fait le plein
-	//reviens vers sa porte
-	//rentre dans sa voiture
+				 break;
+	}
 }

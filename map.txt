@@ -1,46 +1,46 @@
 avvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvmxxuxxmvvvvvvvvvvvvvvvvvvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvz COMMANDES: 
-w                                                        mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w          
-w                                                        mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w  MENU: M   
-w                                                        mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w  QUITTER: Q
-w                                                        mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w  PAUSE: "ESPACE"
-w                                                        mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w
-w                                                        mxxxuxxxm                  mxxuxxm               avvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvc
-w                                                        mxxxuxxxm                  mxxuxxm               w~~~~~~~~~~*sssssss*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-w                                                        mxxxuxxxm                  mxxuxxm               w~~~~~~~~~~*sssssss*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-w                                                avvvvvvvmxbxuxhxmvvvvvvvvvvvvvvvvvvmbxuxhmvvvvZZZZvvvvvvvc~~~~~~~~~~*sssssss*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-w                                                w~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZ~~~~~~~~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-w                                      avvvvvvvvvc~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZ~~~~~~~~~~~~avvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvz
-w                                      w~~~~~~~~~~~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZ~~~~~~~~~~~~w     mxxxuxxxm !vvvvvvvvvvvvvvvvvvvvvvvvvvvf  !vvvvvvvvvvvvvvvvvvvvvvvvvvvf      w
-w                                      w~~~~~~~~~~~~~~~w mxxxuxxxmvvvvvvvvvvvvvvvvvvmxxuxxmvvvvZZZZvz~~~~~~~~~~w     mxxxuxxxm w                           w  w                           w      w
-w                                      w~~~~~~~~~~~~~~~w mxxxuxxxm !vvvvvvvvvvvvvf  mxxuxxm         w~~~~~~~~~~w     mxbxuxhxm w                           w  w                           w      w
-w                                      w~~~~~avvvvvvvvvc mxxxuxxxm w             w  mxxuxxm         w~~~~~~~~~~w     mxxxuxxxm w                           w  w                           w      w
-w                                      ZZZZZZZ           mxbxuxhxm w             w  mbxuxhm         w~~~~~~~~~~w     mxxxuxxxm w                           w  w                           w      w
-w                                      ZZZZZZZ           mxxxuxxxm w             w  mxxuxxm         evvvvz~~~~~w     mxxxuxxxm w                           w  w                           w      w
-w                                      ZZZZZZZ           mxxxuxxxm jvvvvvvvvvvvvvi  mxxuxxm              w~~~~~w     mxxxuxxxm jvvvvvvvvvvvvvvvvvvvvvvvvvvvi  jvvvvvvvvvvvvvvvvvvvvvvvvvvvi      w
+w#############  ####################  ###################mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w          
+w####                                                 ###mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w  MENU: M   
+w####  #############  ##############################  ###mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w  QUITTER: Q
+w      #############  ##############################  ###mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w  PAUSE: "ESPACE"
+w####  #############                    ############  ###mxxxuxxxm                  mxxuxxm                          mxxxuxxxm                                                                   w
+w####  #############  ################  ############  ###mxxxuxxxm                  mxxuxxm               avvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvc
+w####  #############  ################  ############  ###mxxxuxxxm                  mxxuxxm               w~~~~~~~~~~*sssssss*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+w####  #############  #############                   ###mxxxuxxxm                  mxxuxxm               w~~~~~~~~~~*sssssss*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+w####  #############  #############  ############avvvvvvvmxbxuxhxmvvvvvvvvvvvvvvvvvvmbxuxhmvvZZZZZvvvvvvvvc~~~~~~~~~~*sssssss*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+w####  #############  #############  ############w~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~ZZZZZ~~~~~~~~~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+w                                    ##avvvvvvvvvc~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~ZZZZZ~~~~~~~~~~~~~avvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvz
+w####  #############  #############  ##w~~~~~~~~~~~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~ZZZZZ~~~~~~~~~~~~~w     mxxxuxxxm !vvvvvvvvvvvvvvvvvvvvvvvvvvvf  !vvvvvvvvvvvvvvvvvvvvvvvvvvvf      w
+w####  #############  #############  ##w~~~~~~~~~~~~~~~w mxxxuxxxmvvvvvvvvvvvvvvvvvvmxxuxxmvvZZZZZvvz~~~~~~~~~~w     mxxxuxxxm w                           w  w                           w      w
+w####  #############  #############  ##w~~~~~~~~~~~~~~~w mxxxuxxxm !vvvvvvvvvvvvvf  mxxuxxm         w~~~~~~~~~~w     mxbxuxhxm w                           w  w                           w      w
+w####  #############  #############  ##w~~~~~avvvvvvvvvc mxxxuxxxm w             w  mxxuxxm         w~~~~~~~~~~w     mxxxuxxxm w                           w  w                           w      w
+w####  #############  ##########       ZZZZZZZ           mxbxuxhxm w    PMU      w  mbxuxhm         w~~~~~~~~~~w     mxxxuxxxm w                           w  w                           w      w
+w####  #############  ##########       ZZZZZZZ           mxxxuxxxm w             w  mxxuxxm         evvvvz~~~~~w     mxxxuxxxm w                           w  w                           w      w
+w####                                  ZZZZZZZ           mxxxuxxxm jvvvvvvvvvvvvvi  mxxuxxm              w~~~~~w     mxxxuxxxm jvvvvvvvvvvvvvvvvvvvvvvvvvvvi  jvvvvvvvvvvvvvvvvvvvvvvvvvvvi      w
 evvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvc~~~~~w           p|||||||m                  p|||||m              w~~~~~w     p|||||||m                                                                   w
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~wtkkkkkkkkkkoxxxxxxxlkkkkkkkkkkkkkkkkkkoxxxxxlkpkkkkkkkkkkkkkkkkkkkkkkkkoxxxxxxxlkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~wmxxxxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxyxxxxxxxyxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxg
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~wmxxxxxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrryxxx+xxxyxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrr
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~avvvvcmxxxxxxxxxxxxxxxxxxdxxxxxxxxxxxxxxxdxyxxxxxxxyxxxxxdxxxxxxxxxxxxxxxdxxxxxxxxxxxxxxxdxxxxxxxxxxxxxxxdxxxxxxxxxxxxxxxdxxxxxxxxxxxxxxxdxxxxxxxxxxxxxxxd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w     mxxxxxxxtkkkkkkkkkkkkkkkkkkkkkkkkkkkpkqxxxxxtkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkq          xbx  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv   xhx   tkk
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w     mxxxuxxxm                             m|||||p              w~~~~~w #####################                                                           w
-avvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvz~~~~~w     mxbxuxhxm                             mbxuxhm              w~~~~~w ##################### !vvvvvvvvvf                                               w
-w#################################w~~~~~w     mxxxuxxxm                             mxxuxxm              w~~~~~w ##################### w         w                  -----                        w
-w#???????????????????????????????#w~~~~~evvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvmxxuxxmvvvvZZZZvvvvvvc~~~~~evvvvvvz ############## w ESIEA   w      -----------       --------------         w
-w#???????????????????????????????#w~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZ~~~~~~~~~~~~~~~~~~~w ############## w -----   w                                               w
-w#???????????????????????????????#w~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZ~~~~~~~~~~~~~~~~~~~w ############## w ACCESS  w      -----------!kkkkkf--------------         w
-w#???????????????????????????????#w~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZ~~~~~~~~~~~~~~~~~~~w ############## w 24H/7J  w     ¦           jkkkkki              ¦        w
-w#???????????????????????????????#evvvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvmxxuxxmvvvvZZZZvvvvvvvvvvvvz~~~~~~evvvvvvvz ###### w         w      -----------       --------------         w
-w#???????????????????????????????#############mxxxuxxxm               o_.-._        mbxuxhm ###     ########## w~~~~~~~~~~~~~~w ###### jvvvvvvvvvi                                               w
-w#???????????????????????????????????????????#mxxxuxxxm               |_.-._|       mxxuxxm ###     ########## w~~~~~~~~~~~~~~evvvvz # !vvvvvvf         -----------!kkkkkf--------------         w
-w#???????????????????????????????????????????#mxbxuxhxm               |             mxxuxxm ###     ########## w~~~~~~~~~~~~~~~~~~~w # wTOILE-w        ¦           jkkkkki              ¦        w
-w#???????????????????????????????????????????#mxxxuxxxm          ^^^^^^^            mxxuxxm ###     ########## w~~~~~~~~~~~~~~~~~~~w # wTTES  w         --------------------------------         w
-w#???????????????????????????????????????????#mxxxuxxxm  ^^^ ^^^ | : : | ^^^ ^^^    mxxuxxm ###                w~~~~~~~~~~~~~~~~~~~w # jvvvvvvi                                                  w
-w#???????????????????????????????????????????#mxxxuxxxm  | |_| |_|     |_| |_| |    mxxuxxm ###                w~~~~~~~~~~~~~~~~~~~w ############################################################w
-w#???????????????????????????????????????????#mxxxuxxxm  |                     |    mxxuxxm #############      w~~~~~~~~~~~~~~~~~~~evvvvvvvvvvvvvvvvvvvvvvvvvz###################################w
-w#???????????????????????????????????????????#mxxxuxxxm  |  :   :  .-.  :   :  |    mbxuxhm #############      w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w###################################w
-w#???????????????????????????????????????????#mxxxuxxxm  |         | |         |    mxxuxxm #############      w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w###################################w
-w#############################################p|||||||m  "'"''""'"""''''"'"''""'    mxxuxxm #############      w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w###################################w
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w     mxxxuxxxm#############################m|||||p              w~~~~~w #####################                                                           w
+avvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvz~~~~~w     mxbxuxhxm#???????????????????????????#mbxuxhm              w~~~~~w ##################### !vvvvvvvvvf                                               w
+w#################################w~~~~~w     mxxxuxxxm#############################mxxuxxm              w~~~~~w ##################### w         w                  -----                        w
+w#???????????????????????????????#w~~~~~evvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvmxxuxxmvvvvZZZZZvvvvvc~~~~~evvvvvvz ############## w ESIEA   w      -----------       --------------         w
+w#???????????????????????????????#w~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZZ~~~~~~~~~~~~~~~~~~w ############## w -----   w                                               w
+w#???????????????????????????????#w~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZZ~~~~~~~~~~~~~~~~~~w ############## w ACCESS  w      -----------!kkkkkf--------------         w
+w#???????????????????????????????#w~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*sssss*~~~~ZZZZZ~~~~~~~~~~~~~~~~~~w ############## w 24H/7J  w     ¦           jkkkkki              ¦        w
+w#???????????????????????????????#evvvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvmxxuxxmvvvvZZZZZvvvvvvvvvvvz~~~~~~evvvvvvvz ###### w         w      -----------       --------------         w
+w#???????????????????????????????#############mxxxuxxxm               O_.-._        mbxuxhm####?????###########w~~~~~~~~~~~~~~w ###### jvvvvvvvvvi                                               w
+w#???????????????????????????????????????????#mxxxuxxxm               |_.-._|       mxxuxxm####?????###########w~~~~~~~~~~~~~~evvvvz # !vvvvvvf         -----------!kkkkkf--------------         w
+w#???????????????????????????????????????????#mxbxuxhxm               |             mxxuxxm####?????###########w~~~~~~~~~~~~~~~~~~~w # wTOILE-w        ¦           jkkkkki              ¦        w
+w#???????????????????????????????????????????#mxxxuxxxm          ^^^^^^^            mxxuxxm####?????###########w~~~~~~~~~~~~~~~~~~~w # wTTES  w         --------------------------------         w
+w#???????????????????????????????????????????#mxxxuxxxm  ^^^ ^^^ | : : | ^^^ ^^^    mxxuxxm####???????????????#w~~~~~~~~~~~~~~~~~~~w # jvvvvvvi                                                  w
+w#???????????????????????????????????????????#mxxxuxxxm  | |_| |_|     |_| |_| |    mxxuxxm####???????????????#w~~~~~~~~~~~~~~~~~~~w ############################################################w
+w#???????????????????????????????????????????#mxxxuxxxm  |                     |    mxxuxxm####???????????????#w~~~~~~~~~~~~~~~~~~~evvvvvvvvvvvvvvvvvvvvvvvvvz###################################w
+w#???????????????????????????????????????????#mxxxuxxxm  |  :   :  .-.  :   :  |    mbxuxhm##############?????#w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w###################################w
+w#???????????????????????????????????????????#mxxxuxxxm  |         | |         |    mxxuxxm##############?????#w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w###################################w
+w#############################################p|||||||m  "'"''""'"""''''"'"''""'    mxxuxxm##############?????#w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w###################################w
 kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkoxxxxxxxlkpkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 xxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxyxxxxxxxxxyxxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxx
 xxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrryxxxx+xxxxyxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxx

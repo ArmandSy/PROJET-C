@@ -45,9 +45,11 @@ void appendPietonList(PietonList** ListeDesPietons, Pieton* Pieton);
 
 PietonList* pietonEater(PietonList **List, Pieton* Pieton);
 
-void affichagePieton(Pieton* Pieton);
+void affichagePieton(char ** MatriceMap, Pieton* Pieton);
 
 void affichagePartielPieton(char ** MatriceMap, Pieton* Pieton);
+
+Direction directionRandom(Direction A, Direction B);
 
 void setNewPietonDirection(Pieton* Pieton, char ** MatriceDecision, PietonList *ListeDesPietons);
 
@@ -56,6 +58,4 @@ Position* positionFuturePieton(Pieton* Pieton);
 int ObstaclePieton(char ** MatriceDecision, int i, int j);
 
 void roulementPietonsPosition(char ** MatriceMap, char** MatriceDecision, PietonList** ListeDesPietons);
-
-Direction directionRandom(Direction A, Direction B);
 

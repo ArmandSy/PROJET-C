@@ -252,9 +252,9 @@ void affichagePartielTramway(char ** MatriceMap, Tramway * Tramway)
 				if(Tramway->CaseDecision != 'F')
 				{
 					couleur("37");
-					printf("\033[%d;%dHa\n",Tramway->posX,Tramway->posY+1);
-					printf("\033[%d;%dHa\n",Tramway->posX,Tramway->posY+2);
-					printf("\033[%d;%dHa\n",Tramway->posX,Tramway->posY+3);	
+					printf("\033[%d;%dH\n",Tramway->posX,Tramway->posY+1);
+					printf("\033[%d;%dH\n",Tramway->posX,Tramway->posY+2);
+					printf("\033[%d;%dH\n",Tramway->posX,Tramway->posY+3);	
 					couleur("0");
 				}
 				caractere = MatriceMap[Tramway->posX][Tramway->posY+4];
@@ -267,7 +267,9 @@ void affichagePartielTramway(char ** MatriceMap, Tramway * Tramway)
 			}
 		switch(caractere)
 			{
-				case '#': couleur("45");printf("♨");couleur("0");break;
+				//herbe
+				case '#': couleur("38;5;46");printf("♨");couleur("0");break;
+				case '?': couleur("48;5;22");printf(" ");couleur("0");break;
 				//eau
 				case '~': couleur("46");printf(" ");couleur("0");break;
 				//caracteres liés a la route
@@ -282,6 +284,7 @@ void affichagePartielTramway(char ** MatriceMap, Tramway * Tramway)
 				case 'h': couleur("32");printf("↑");couleur("0");break;
 				case 'b': couleur("32");printf("↓");couleur("0");break;
 				case 'p': couleur("44");printf(" ");couleur("0");break;
+				case 'Z': couleur("48;5;52");printf(" ");couleur("0");break;
 				case 'n': printf("⛱");break;
 				//caracters spéciaux:
 				case 'k': printf("═");break;
@@ -303,7 +306,7 @@ void affichagePartielTramway(char ** MatriceMap, Tramway * Tramway)
 				case '%': printf("▒");break;
 				case '*': printf("▓");break;
 				//caracteres par default
-				default: printf("%c",' ');break;
+				default: printf("%c",caractere);break;
 			}
 		}	
 }
@@ -551,7 +554,7 @@ void feuxDeTram(char ***MatriceDecision, char **MatriceMap, Tramway * T1, Tramwa
 	}
 }
 
-//56,118 Corner ligne 1
+
 int compteurDeTramways(TramwayList** ListeDesTramways){
 	int i=0;
 	TramwayList *tmp;

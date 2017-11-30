@@ -100,3 +100,22 @@ void modificationDeMatrice(TrafficLight * T, char *** MatriceDecision, char cara
 		}
 	}
 }
+
+void feuxPietons(char *** MatriceDecision){
+	if((*MatriceDecision)[20][60] == 'o'){
+		(*MatriceDecision)[20][66] = '+';
+	}else{
+		(*MatriceDecision)[20][66] = 'o';
+	}
+	if((*MatriceDecision)[20][87] == 'o'){
+		(*MatriceDecision)[20][89] = '+';
+	}else{
+		(*MatriceDecision)[20][89] = 'o';
+	}
+	if((*MatriceDecision)[22][93] == 'o'){
+		(*MatriceDecision)[25][93] = '+';
+	}else{
+		(*MatriceDecision)[25][93] = 'o';
+	}
+	
+}
