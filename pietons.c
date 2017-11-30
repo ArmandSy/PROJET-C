@@ -146,6 +146,8 @@ void setNewPietonDirection(Pieton* Pieton, char ** MatriceDecision, PietonList *
 		case 'z':
 			Pieton->Direction = directionRandom(EST,OUEST);
 			break;
+		case 'y':
+			Pieton->Direction = directionRandom(EST, SUD);
 	}
 
 }

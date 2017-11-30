@@ -47,7 +47,7 @@ void affichageMap(){
 				case 'i': printf("╯");break;
 				case 'j': printf("╰");break;
 				case '!': printf("╭");break;
-				case '%': printf("▒");break;
+				case '%': couleur("48;5;94");printf("▒");couleur("0");break;
 				case '*': printf("▓");break;
 				//caracteres par default
 				default: printf("%c",caractere);break;

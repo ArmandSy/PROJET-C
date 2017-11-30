@@ -173,10 +173,10 @@ void lancementModeSafe(){
 		randomSpawnLapin(&ListeDesLapins);
 		}
 
-		tramwaySpawner(67, 114, NORD, &ListeDesTramways);
-		tramwaySpawner(56, 0, EST, &ListeDesTramways);
+		//tramwaySpawner(67, 114, NORD, &ListeDesTramways);
+		//tramwaySpawner(56, 0, EST, &ListeDesTramways);
 
-		/*
+		
 		if(i%420 == 400)
 		{
 			tramwaySpawner(56, 0, EST, &ListeDesTramways);	
@@ -186,7 +186,7 @@ void lancementModeSafe(){
 		{
 			tramwaySpawner(67, 114, NORD, &ListeDesTramways);
 		}
-		*/
+		
 
 		if(i%5 == 0)
 		{
@@ -276,12 +276,20 @@ void lancementModeDanger(){
 
 	TramwayList* ListeDesTramways = NULL;
 
+	TramwayList* ListeDesAnimes = NULL;
+
 	PietonList* ListeDesPietons = NULL;
 
 	LapinList* ListeDesLapins = NULL;
 
+	VehiculeList*  ListeAnime = NULL;
+
+	vehiculeSpawner(1, 86, SUD, FAIBLE, 's', MatriceDecision, &ListeAnime);
+
 	tramwaySpawner(67, 114, NORD, &ListeDesTramways);
 	tramwaySpawner(56, 0, EST, &ListeDesTramways);
+
+	tramwaySpawner(56, 0, EST, &ListeDesAnimes);
 
 	int i = 0;
 	char touche;
@@ -299,16 +307,48 @@ void lancementModeDanger(){
 			}
 		}
 		i++;
-
-		randomSpawnPieton(&ListeDesPietons);
-
-		randomSpawnBoat(MatriceDecision, &ListeDesBoats);
-
+		
+		if(i==1 || i%3000 == 0)
+		{
 		randomSpawnLapin(&ListeDesLapins);
+		randomSpawnLapin(&ListeDesLapins);
+		randomSpawnLapin(&ListeDesLapins);
+		}
+
+		//tramwaySpawner(67, 114, NORD, &ListeDesTramways);
+		//tramwaySpawner(56, 0, EST, &ListeDesTramways);
+
+		
+		if(i%420 == 400)
+		{
+			tramwaySpawner(56, 0, EST, &ListeDesTramways);	
+		}
+
+		if(i%420 == 372)
+		{
+			tramwaySpawner(67, 114, NORD, &ListeDesTramways);
+		}
+		
+
+		if(i%5 == 0)
+		{
 
 		randomSpawnVehicule(MatriceDecision, &ListeDesVehicules);
 
-		roulementPietonsPosition(MatriceMap, MatriceDecision, &ListeDesPietons);
+		randomSpawnBoat(MatriceDecision, &ListeDesBoats);
+		}
+
+		if(i%7 == 0)
+		{
+			roulementPietonsPosition(MatriceMap, MatriceDecision, &ListeDesPietons);
+		}
+
+		if(i%10 == 0)
+		{
+			randomSpawnPieton(&ListeDesPietons);
+		}		
+		
+		animation1(&ListeAnime, &ListeDesAnimes, &MatriceDecision, MatriceMap);
 
 		roulementBoatsPosition(MatriceMap, MatriceDecision, &ListeDesBoats);
 
@@ -330,6 +370,30 @@ void lancementModeDanger(){
 			eaterAffichage(TramwayEater2,2);
 		}
 
+		if(i==1)
+		{
+			vehiculeSpawner(22, 193, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+			vehiculeSpawner(47, 2, EST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+			boatSpawner(22, 1, DROITE, AleatoireCustomBoat(), MatriceDecision, &ListeDesBoats);
+		}
+		if(i==10)
+		{
+			vehiculeSpawner(22, 193, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+			vehiculeSpawner(47, 2, EST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+			boatSpawner(22, 1, DROITE, AleatoireCustomBoat(), MatriceDecision, &ListeDesBoats);
+		}
+		if(i==30)
+		{
+			vehiculeSpawner(22, 193, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+			vehiculeSpawner(47, 2, EST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+			boatSpawner(26, 1, DROITE, AleatoireCustomBoat(), MatriceDecision, &ListeDesBoats);
+		}
+		if(i==90)
+		{	
+			vehiculeSpawner(22, 193, OUEST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+			vehiculeSpawner(47, 2, EST, FAIBLE, AleatoireCustomVehicule(), MatriceDecision, &ListeDesVehicules);
+			i=0;
+		}
 		if(i%15 == 0)
 		{
 			roulementLapinsPosition(MatriceMap, MatriceDecision, &ListeDesLapins);
@@ -376,3 +440,114 @@ void creationDesFeux(TrafficLightList ** Liste){
 void details(){
 
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void animation1(VehiculeList ** ListeDesVehicules, TramwayList ** ListeTramways, char *** MatriceDecision, char ** MatriceMap){
+	//creer la voiture et le tram de sorte qu'ils se rencontre au point de coordonées
+	//voiture et tram n'appartenant pas au listes, ils ont leur porpres directives (ils avances tous les deux de maniere rectiligne)
+	//la voiture arrive un peu avant, le personnage sort , il est en panne !
+	//le tram arrive et ne s'arrete pas.
+	//collision et flammes.
+	
+	VehiculeList * tmp;
+	tmp = * ListeDesVehicules;
+
+	if(tmp->Vehicule->posX < 56){
+
+		Position* NextPosition = positionFuture(tmp->Vehicule);
+
+		if((*MatriceDecision)[NextPosition->posX][NextPosition->posY] == 'f')
+		{
+			affichageVehicule(tmp->Vehicule);
+		}
+		else if((*MatriceDecision)[NextPosition->posX][NextPosition->posY] =='c')
+		{
+			affichageVehicule(tmp->Vehicule);
+		}	
+		else
+		{
+			if(tmp->Vehicule->CaseDecision == 'F')
+			{
+				if((*MatriceDecision)[NextPosition->posX][NextPosition->posY] == 'A')
+				{
+					affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+					tmp->Vehicule->posX++;
+					tmp->Vehicule->CaseDecision = (*MatriceDecision)[tmp->Vehicule->posX][tmp->Vehicule->posY];
+					(*MatriceDecision)[tmp->Vehicule->posX][tmp->Vehicule->posY] = 'c';
+					affichageVehicule(tmp->Vehicule);
+					
+				}
+				else
+				{	
+						tmp->Vehicule->posX++;
+				}
+			}else{
+
+				(*MatriceDecision)[tmp->Vehicule->posX][tmp->Vehicule->posY] = tmp->Vehicule->CaseDecision; //La ou la voiture etait devient de la route (place libre)
+				affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+				tmp->Vehicule->posX++; //On actualise la position de la voiture dans la structure 
+				tmp->Vehicule->CaseDecision = (*MatriceDecision)[tmp->Vehicule->posX][tmp->Vehicule->posY]; // MAJ de la case decision
+
+				if(tmp->Vehicule->CaseDecision == 'E')
+				{
+					affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+					tmp = vehiculeEater(ListeDesVehicules, tmp->Vehicule);	
+
+				}
+				else if(tmp->Vehicule->CaseDecision == 'D')
+				{
+					(*MatriceDecision)[tmp->Vehicule->posX][tmp->Vehicule->posY] = tmp->Vehicule->CaseDecision;
+					affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+					tmp->Vehicule->posX++;
+					tmp->Vehicule->CaseDecision = 'F';
+					
+
+				}
+				else
+				{	
+					affichagePartielVehicule(MatriceMap, tmp->Vehicule);
+					(*MatriceDecision)[tmp->Vehicule->posX][tmp->Vehicule->posY] = 'c'; //On actualise la MatricePositionVehicules pour signaler qu'une voiture se trouve maintenant a cette position
+					affichageVehicule(tmp->Vehicule);	
+					
+				}
+			}
+		}
+		printf("\033[67;1Houi]");
+	}else{
+
+		printf("\033[67;1Hnon]");
+		switch(tmp->Vehicule->posX){
+
+			case 57: printf("\033[%d;%dH🚶", 56, tmp->Vehicule->posY+2);break;
+			case 60: printf("\033[%d;%dH──", 56, tmp->Vehicule->posY+2);printf("\033[%d;%dH🚶", 56+1, tmp->Vehicule->posY+1);break;
+			case 61: printf("\033[%d;%dH─", 56+1, tmp->Vehicule->posY+1);printf("\033[%d;%dH🚶", 56+1, tmp->Vehicule->posY);break;
+			case 63: printf("\033[%d;%dH?", 56+1, tmp->Vehicule->posY+2);break;
+
+			case 110: printf("\033[%d;%dH!", 56+1, tmp->Vehicule->posY+2);break;
+		}
+		
+		if(120 <= tmp->Vehicule->posX){
+
+			if(tmp->Vehicule->posY >= 100){
+				couleur("31");
+				printf("\033[55;%dH🔥🔥",tmp->Vehicule->posY-1);
+				printf("\033[56;%dH🔥",tmp->Vehicule->posY+1);
+				printf("\033[57;%dH🔥🔥",tmp->Vehicule->posY-1);
+				couleur("0");
+			}
+
+			if(tmp->Vehicule->posY < 100){
+				printf("\033[%d;%dH─&&&&🚘", 56, tmp->Vehicule->posY-5);
+				if(tmp->Vehicule->posY%2 == 0){
+					couleur("31");
+					printf("\033[%d;%dH🔥", 57, tmp->Vehicule->posY-1);
+					printf("\033[%d;%dH🔥", 55, tmp->Vehicule->posY-1);
+					couleur("0");
+				}
+				tmp->Vehicule->posY++;
+			}
+
+		}
+		tmp->Vehicule->posX++;
+	}
+}
+
