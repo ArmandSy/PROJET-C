@@ -1,9 +1,9 @@
 
  avvvvvvvvvvvvi  jvvvvvvvvvvvvvvvvvvi  jvvvvvvvvvvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvmxxuxxmvvvvvvvvvvvvvvvvvvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvz COMMANDES: 
  w#############??####################??###################mxxxuxxxm??????????????????mxxuxxm                          mxxxuxxxm                                                                   w          
- w####?????????????????????????????????????????????????###mxxxuxxxm??????????????????mxxuxxm                          mxxxuxxxm                                                                   w  MENU: M   
- i####??!vvvvvvvvvvvf????KONIGSBERG'S????!vvvvvvvvvvf??###mxxxuxxxm??????????????????mxxuxxm                          mxxxuxxxm                                                                   w  QUITTER: Q
-  ??????w###########w???????GARDEN???????w##########w??###mxxxuxxxm??????????????????mxxuxxm                          mxxxuxxxm                                                                   w  PAUSE: "ESPACE"
+ w####?????????????????????????????????????????????????###mxxxuxxxm??????????????????mxxuxxm                          mxxxuxxxm                                                                   w  QUITTER: Q
+ i####??!vvvvvvvvvvvf????KONIGSBERG'S????!vvvvvvvvvvf??###mxxxuxxxm??????????????????mxxuxxm                          mxxxuxxxm                                                                   w  PAUSE: "ESPACE"
+  ??????w###########w???????GARDEN???????w##########w??###mxxxuxxxm??????????????????mxxuxxm                          mxxxuxxxm                                                                   w                 
  f####??w###########w????????????????????w##########w??###mxxxuxxxm??????????????????mxxuxxm                          mxxxuxxxm                                                                   w
  w####??w###########w??!vvvvvvvvvvvvvvf??w##########w??###mxxxuxxxm??????????????????mxxuxxm               avvvvvvvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvZZZZvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvc
  w####??w###########w??w###########!vvi??jvvvvvvvvvvi??###mxxxuxxxm??????????????????mxxuxxm               w~~~~~~~~~~*sssssss*~~~~~~~~~~~~~~~~~~~~~~~~~~~ZZZZ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -11,14 +11,14 @@
  w####??w###########w??w###########w??############avvvvvvvmxbxuxhxmvvvvvvvvvvvvvvvvvvmbxuxhmvvZZZZZvvvvvvvvc~~~~~~~~~~*sssssss*~~~~~~~~~~~~~~~~~~~~~~~~~~~ZZZZ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  i####??jvvvvvvvvvvvi??jvvvvvvvvvvvi??############w~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~ZZZZZ~~~~~~~~~~~~~~~~~~~mxxxuxxxm~~~~~~~~~~~~~~~~~~~~~~~~~~~ZZZZ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ????????????????????????????????????##avvvvvvvvvc~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~ZZZZZ~~~~~~~~~~~~~avvvvvmxxxuxxxmvvvvvvvvvvvvvvvvvvvvvvvvvvvZZZZvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvz
- f####??!vvvvvvvvvvvf??!vvvvvvvvvvvf??##w~~~~~~~~~~~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~ZZZZZ~~~~~~~~~~~~~w#### mxxxuxxxm   !vvvvvvvvvvvvvvvvvvvvvvv    vvvvvvvvvvvvvvvvvvvvvvvvvvvvf       w
- w####??w###########w??w###########w??##w~~~~~~~~~~~~~~~w mxxxuxxxmvvvvvvvvvvvvvvvvvvmxxuxxmvvZZZZZvvz~~~~~~~~~~w#### mxxxuxxxm   w                                                       w       w
- w####??w###########w??w###########w??##w~~~~~~~~~~~~~~~w mxxxuxxxm !vvvvvvvvvvvvvf  mxxuxxm         w~~~~~~~~~~w#### mxbxuxhxm   w                                                       w       w
- w####??w###########w??w########!vvw??##w~~~~~avvvvvvvvvc mxxxuxxxm w             w  mxxuxxm         w~~~~~~~~~~w#### mxxxuxxxm   w                                                       w       w
- w####??w###########w??w########w???????ZZZZZZZ           mxbxuxhxm w    PMU      w  mbxuxhm         w~~~~~~~~~~w#### mxxxuxxxm   w                                                       w       w
- w####??jvvvvvvvvvvvi??jvvvvvvvvi???????ZZZZZZZ           mxxxuxxxm w             w  mxxuxxm         evvvvz~~~~~w#### mxxxuxxxm   w                                                       w       w
- w####??????????????????????????????????ZZZZZZZ           mxxxuxxxm jvvvvvvvvvvvvvi  mxxuxxm              w~~~~~w#### mxxxuxxxm   jvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvi       w
- evvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvc~~~~~w           p|||||||m                  p|||||m              w~~~~~w#### p|||||||m                                                                   w
+ f####??!vvvvvvvvvvvf??!vvvvvvvvvvvf??##w~~~~~~~~~~~~~~~~*sssssssss*~~~~~~~~~~~~~~~~~*sssss*~~ZZZZZ~~~~~~~~~~~~~w#### mxxxuxxxm                                                                   w
+ w####??w###########w??w###########w??##w~~~~~~~~~~~~~~~w mxxxuxxxmvvvvvvvvvvvvvvvvvvmxxuxxmvvZZZZZvvz~~~~~~~~~~w#### mxxxuxxxm     !vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvf       w
+ w####??w###########w??w###########w??##w~~~~~~~~~~~~~~~w mxxxuxxxm !vvvvvvvvvvvvvf  mxxuxxm         w~~~~~~~~~~w#### mxbxuxhxm     w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w       w
+ w####??w###########w??w########!vvw??##w~~~~~avvvvvvvvvc mxxxuxxxm w             w  mxxuxxm         w~~~~~~~~~~w#### mxxxuxxxm     w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w       w
+ w####??w###########w??w########w???????ZZZZZZZ           mxbxuxhxm w    PMU      w  mbxuxhm         w~~~~~~~~~~w#### mxxxuxxxm     w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w       w
+ w####??jvvvvvvvvvvvi??jvvvvvvvvi???????ZZZZZZZ           mxxxuxxxm w             w  mxxuxxm         evvvvz~~~~~w#### mxxxuxxxm     w~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~w       w
+ w####??????????????????????????????????ZZZZZZZ           mxxxuxxxm jvvvvvvvvvvvvvi  mxxuxxm              w~~~~~w#### mxxxuxxxm     jvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvi       j
+ evvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvc~~~~~w           p|||||||m                  p|||||m              w~~~~~w#### p|||||||m                                                                    
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~wtkkkkkkkkkkoxxxxxxxlkkkkkkkkkkkkkkkkkkoxxxxxlkpkkkkkkkkkkkkkkkkkkkkkkkkoxxxxxxxlkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~wmxxxxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxyxxxxxxxyxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxgxxxxxxxxxxxxxxxg
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~wmxxxxxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrryxxx+xxxyxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrrrxxxxxrr

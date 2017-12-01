@@ -46,9 +46,9 @@ void randomSpawnBoat(char ** MatriceDecision, BoatList** ListeDesBoats)
 
 void randomSpawnLapin(LapinList** ListeDesLapins)
 {
-	int i = rand()%15;
-	int j = rand()%30;
-	lapinSpawner(28 + i, 3 + j, ListeDesLapins);
+	int i = rand()%10;
+	int j = rand()%25;
+	lapinSpawner(30 + i, 4 + j, ListeDesLapins);
 }
 
 void randomSpawnHelicoptere(HelicoptereList** ListeDesHelicopteres)
@@ -94,7 +94,7 @@ void randomSpawnVehicule(char** MatriceDecision, VehiculeList** ListeDesVehicule
 		case 7:
 		vehiculeSpawner(66, 53, NORD, i%2, AleatoireCustomVehicule(), MatriceDecision, ListeDesVehicules); break;
 		case 8:
-		vehiculeSpawner(66, 89, OUEST, i%2, AleatoireCustomVehicule(), MatriceDecision, ListeDesVehicules);break;
+		vehiculeSpawner(66, 89, NORD, i%2, AleatoireCustomVehicule(), MatriceDecision, ListeDesVehicules);break;
 		case 9:
 		vehiculeSpawner(1, 60, SUD, i%2, AleatoireCustomVehicule(), MatriceDecision, ListeDesVehicules); break;
 		vehiculeSpawner(45, 194, OUEST, i%2, AleatoireCustomVehicule(), MatriceDecision, ListeDesVehicules); break;
@@ -149,6 +149,9 @@ void lancementModeSafe(){
 
 	LapinList* ListeDesLapins = NULL;
 
+	tramwaySpawner(67, 114, NORD, &ListeDesTramways);
+	tramwaySpawner(56, 0, EST, &ListeDesTramways);	
+
 	int i = 0;
 	char touche;
 	while(touche != 'q'){
@@ -166,10 +169,10 @@ void lancementModeSafe(){
 		}
 		i++;
 
-		if(i==1 || i%3000 == 0)
+		details();
+
+		if(i==3)
 		{
-		randomSpawnLapin(&ListeDesLapins);
-		randomSpawnLapin(&ListeDesLapins);
 		randomSpawnLapin(&ListeDesLapins);
 		}
 
@@ -196,12 +199,12 @@ void lancementModeSafe(){
 		randomSpawnBoat(MatriceDecision, &ListeDesBoats);
 		}
 
-		if(i%7 == 0)
+		if(i%3 == 0)
 		{
-			roulementPietonsPosition(MatriceMap, MatriceDecision, &ListeDesPietons);
+			roulementPietonsPosition(MatriceMap, &MatriceDecision, &ListeDesPietons);
 		}
 
-		if(i%10 == 0)
+		if(i%60 == 0)
 		{
 			randomSpawnPieton(&ListeDesPietons);
 		}
@@ -236,7 +239,7 @@ void lancementModeSafe(){
 			roulementLapinsPosition(MatriceMap, MatriceDecision, &ListeDesLapins);
 		}
 
-		for(int j = 0; j<20000000; j++){} 
+		for(int j = 0; j<200000; j++){} 
 		printf("\033[67;0H");
 		touche = key_pressed();
 		printf("\033[67;0H ");
@@ -280,7 +283,7 @@ void lancementModeDanger(){
 
 	PietonList* ListeDesPietons = NULL;
 
-	LapinList* ListeDesLapins = NULL;
+	//LapinList* ListeDesLapins = NULL;
 
 	VehiculeList*  ListeAnime = NULL;
 
@@ -290,7 +293,7 @@ void lancementModeDanger(){
 	tramwaySpawner(56, 0, EST, &ListeDesTramways);
 
 	tramwaySpawner(56, 0, EST, &ListeDesAnimes);
-
+	MatriceDecision[44][86] = '+';
 	int i = 0;
 	char touche;
 	while(touche != 'q'){
@@ -307,12 +310,14 @@ void lancementModeDanger(){
 			}
 		}
 		i++;
+
+		details();
 		
 		if(i==1 || i%3000 == 0)
-		{
+		{/*
 		randomSpawnLapin(&ListeDesLapins);
 		randomSpawnLapin(&ListeDesLapins);
-		randomSpawnLapin(&ListeDesLapins);
+		randomSpawnLapin(&ListeDesLapins);*/
 		}
 
 		//tramwaySpawner(67, 114, NORD, &ListeDesTramways);
@@ -340,7 +345,7 @@ void lancementModeDanger(){
 
 		if(i%7 == 0)
 		{
-			roulementPietonsPosition(MatriceMap, MatriceDecision, &ListeDesPietons);
+			roulementPietonsPosition(MatriceMap, &MatriceDecision, &ListeDesPietons);
 		}
 
 		if(i%10 == 0)
@@ -396,7 +401,7 @@ void lancementModeDanger(){
 		}
 		if(i%15 == 0)
 		{
-			roulementLapinsPosition(MatriceMap, MatriceDecision, &ListeDesLapins);
+			//roulementLapinsPosition(MatriceMap, MatriceDecision, &ListeDesLapins);
 		}
 
 		//tramwaySpawner(65, 114, j+1, 0, NORD, &ListeDesTramways);	
@@ -438,7 +443,16 @@ void creationDesFeux(TrafficLightList ** Liste){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void details(){
-
+	printf("\033[67;1H     ");
+	//printf("\033[28;187H  ");
+	//printf("\033[29;187H  ");
+	//printf("\033[30;187H  ");
+	//printf("\033[31;187H  ");
+	printf("\033[32;187H  ");
+	printf("\033[33;187H  ");
+	printf("\033[34;187H  ");
+	printf("\033[46;86H  ");
+	
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void animation1(VehiculeList ** ListeDesVehicules, TramwayList ** ListeTramways, char *** MatriceDecision, char ** MatriceMap){
@@ -493,7 +507,7 @@ void animation1(VehiculeList ** ListeDesVehicules, TramwayList ** ListeTramways,
 					tmp = vehiculeEater(ListeDesVehicules, tmp->Vehicule);	
 
 				}
-				else if(tmp->Vehicule->CaseDecision == 'D')
+				else if(tmp->Vehicule->CaseDecision == '+')
 				{
 					(*MatriceDecision)[tmp->Vehicule->posX][tmp->Vehicule->posY] = tmp->Vehicule->CaseDecision;
 					affichagePartielVehicule(MatriceMap, tmp->Vehicule);
@@ -511,10 +525,10 @@ void animation1(VehiculeList ** ListeDesVehicules, TramwayList ** ListeTramways,
 				}
 			}
 		}
-		printf("\033[67;1Houi]");
+		
 	}else{
 
-		printf("\033[67;1Hnon]");
+		
 		switch(tmp->Vehicule->posX){
 
 			case 57: printf("\033[%d;%dH🚶", 56, tmp->Vehicule->posY+2);break;
@@ -536,7 +550,7 @@ void animation1(VehiculeList ** ListeDesVehicules, TramwayList ** ListeTramways,
 			}
 
 			if(tmp->Vehicule->posY < 100){
-				printf("\033[%d;%dH─&&&&🚘", 56, tmp->Vehicule->posY-5);
+				printf("\033[%d;%dH─∎∎∎∎🚘", 56, tmp->Vehicule->posY-5);
 				if(tmp->Vehicule->posY%2 == 0){
 					couleur("31");
 					printf("\033[%d;%dH🔥", 57, tmp->Vehicule->posY-1);
