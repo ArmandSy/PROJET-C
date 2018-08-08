@@ -9,7 +9,7 @@ Once the program is launched you can choose within two modes :
 - Normal
 - Danger
 
-The main difference between the two modes is the traffic density (entities spawn more often in the Danger mode), and at the beggining of the Danger mode, there's a crash occurring between a car and a tramway.
+The main difference between the two modes is the traffic density (entities spawn more often in the Danger mode), and at the beginning of the Danger mode, there's a crash occurring between a car and a tramway.
 
 The spawns of the entities are completly randomized, so each time you launch the program you get an unique result.
 
