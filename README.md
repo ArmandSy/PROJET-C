@@ -1,6 +1,6 @@
-### PROJET C
+# PROJET C
 
-##English
+## English
 
 A school project which goal was to simulate a city's traffic in the Unix shell, as a first step to learn C language programming.  
 
@@ -21,7 +21,7 @@ Preview image:
 
 ![Preview on some Ubuntu distribution](https://imageshack.com/a/img922/7444/gwb3mV.png)
 
-##Français
+## Français
 
 Un projet d'école dont le but était de simuler un trafic urbain dans le terminal bash, afin d'apprendre les bases du langage C.
 
